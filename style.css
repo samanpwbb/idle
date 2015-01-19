@@ -1,11 +1,19 @@
 /* lots of weird interaction possibilities, especially with
 some class toggling in javascript */
-.bg-green {
+[class*='bg-'] {
 transition:background-color .25s;
 }
-.hover-fill:hover .bg-green,
-.hover-fill.bg-green:hover {
+.hover-fill:hover [class*='bg-'],
+.hover-fill[class*='bg-']:hover {
   background-color: #0074D9;
+}
+
+.offset-top {
+  top: 100%;
+}
+
+.offset-bottom {
+  bottom: 100%;
 }
 
 i.body-container {
@@ -19,10 +27,11 @@ i.body-container {
 
 .chest {
   -webkit-animation: ease-in-out breathe-grow 1.5s .25s infinite alternate backwards;
+  margin-bottom: 1vmin;
 }
 
 .head {
-  top: -11vmin;
+  margin-bottom: 1vmin;
   -webkit-animation: ease-in-out breathe 1.5s .0s infinite alternate backwards;
 }
 
@@ -59,17 +68,12 @@ i.body-container {
   bottom: -5vmin;
 }
 
-.pelvis {
-  bottom: 2vmin;
-}
-
 .leg-container {
-  bottom: 2vmin;
+  margin-top: -1vmin;
 }
 
 .upper-leg {
   transform-origin: top center;
-  bottom: -9vmin;
 }
 
 .upper-leg.left {
@@ -82,7 +86,7 @@ i.body-container {
 
 .lower-leg {
   transform-origin: top center;
-  bottom: -13vmin;
+  margin-top: 1vmin;
 }
 
 .lower-leg.left {
@@ -95,6 +99,10 @@ i.body-container {
 
 .foot {
   bottom: -1vmin;
+}
+
+.eye {
+  background-color: white;
 }
 
 @-webkit-keyframes breathe {
