@@ -1,5 +1,10 @@
 $(document).ready(function() {
 
+  /* TODO
+  1. Dynamically generate forms based on which attributes are available.
+  2. Add more forms
+  */
+
   /* Configure form settings */
   var config = {
     'height': {
@@ -11,30 +16,43 @@ $(document).ready(function() {
       'regex': /w[0-9]+/,
       'min':4,
       'max':12
+    },
+    'color': {
+      'regex': /bg-[0-9]+/,
+      'min':1,
+      'max':17
     }
   };
 
   /* Create form */
-  var form = _.template($('.js-template').html());
+  var form = _.template($('.js-form-template').html());
+  var field = _.template($('.js-field-template').html());
+
   $('.js-configurable').on('click', function(ev) {
 
     $('.js-form').html(form({element: ev.currentTarget.id}));
 
     var bodyPart = ev.currentTarget;
 
-    /* Event handlers */
-    $('.js-height-up').on('click', function(ev) {
-      changeClass(bodyPart, true, 'height');
-      return false;
-    });
+    for (var key in config) {
+      var classList = ev.currentTarget.className;
+      var match = classList.search(config[key].regex);
+      if (match > -1) {
+        $('.js-fields').append(field({ attribute: key}));
+      }
+    };
 
-    $('.js-height-down').on('click', function(ev) {
-      changeClass(bodyPart, false, 'height');
+    /* Event handlers */
+    $('.js-input').on('click', function(ev) {
+      var target = $(ev.currentTarget);
+      var bodyPart = document.getElementById($('.js-fields').attr('id').split('form-').pop());
+      var attribute = target.parents('.js-field').attr('id').split('field-').pop();
+      var increment = target.hasClass('js-up');
+      changeClass(bodyPart, attribute, increment);
       return false;
     });
 
   });
-
 
   /* Manipulate attributes */
   var getClassFromList = function(el, classRegex) {
@@ -46,10 +64,12 @@ $(document).ready(function() {
     return parseInt(className.substr(index));
   };
 
-  var changeClass = function(el, increment, attribute) {
+  var changeClass = function(el, attribute, increment) {
     var currentClass = getClassFromList(el,config[attribute].regex);
     var currentNum = getNumberFromClass(currentClass);
     var newNum = currentNum + (increment ? 1 : -1);
+
+    console.log(el);
 
     if (increment) {
       if (currentNum >= config[attribute].max) {
@@ -61,7 +81,7 @@ $(document).ready(function() {
       }
     }
 
-    var newClass = 'h' + newNum;
+    var newClass = currentClass.replace(currentNum,newNum);
 
     $(el).removeClass(currentClass).addClass(newClass);
   };

@@ -3,7 +3,6 @@
 <head>
   <title>First</title>
   <link rel='stylesheet' href='reset.css' />
-  <link rel='stylesheet' href='colors.css' />
   <link rel='stylesheet' href='base.css' />
   <link rel='stylesheet' href='style.css' />
   <script type='text/javascript' src='underscore-min.js'></script>
@@ -15,59 +14,64 @@
 <i id='body-container' class='w10 contain center-x center-y'>
 
   <i class='offset-bottom center-x'>
-    <i id='head' class='js-configurable r6 h10 w8 center-x bg-black marginb1 relative hover-fill'>
+    <i id='head' class='js-configurable r6 h10 w8 center-x bg-16 marginb1 relative hover-fill'>
       <i id='face' class='center-x center-y'>
         <i id='eye' class='relative inline r7 h3 w3 bg-white no-hover'></i>
       </i>
     </i>
 
     <i id='arm-container-left' class='center-x hover-fill'>
-      <i id='upper-arm-left' class='js-configurable r2 a-tl h9 w4 rotate2 marginl4-n bg-black'>
-        <i id='lower-arm-left' class='js-configurable r2 h8 w4 margint1 offset-top a-bl rotate1-n bg-black'>
-          <i id='hand-left' class='js-configurable h4 w4 offset-top margint1 r7 bg-black'></i>
+      <i id='upper-arm-left' class='js-configurable r2 a-tl h9 w4 rotate2 marginl4-n bg-16'>
+        <i id='lower-arm-left' class='js-configurable r2 h8 w4 margint1 offset-top a-bl rotate1-n bg-16'>
+          <i id='hand-left' class='js-configurable h4 w4 offset-top margint1 r7 bg-16'></i>
         </i>
       </i>
     </i>
 
     <i id='arm-container-right' class='center-x hover-fill'>
-      <i id='upper-arm-right' class='js-configurable r2 a-tr h9 w4 rotate2-n marginr4-n bg-black'>
-        <i id='lower-arm-right' class='js-configurable r2 h8 w4 offset-top margint1 a-br rotate1 bg-black'>
-          <i id='hand-right' class='js-configurable h4 w4 offset-top margint1 r7 bg-black'></i>
+      <i id='upper-arm-right' class='js-configurable r2 a-tr h9 w4 rotate2-n marginr4-n bg-16'>
+        <i id='lower-arm-right' class='js-configurable r2 h8 w4 offset-top margint1 a-br rotate1 bg-16'>
+          <i id='hand-right' class='js-configurable h4 w4 offset-top margint1 r7 bg-16'></i>
         </i>
       </i>
     </i>
 
-    <i id='chest' class='js-configurable r2 h8 bg-black center-x relative marginb1 hover-fill'></i>
+    <i id='chest' class='js-configurable r2 h8 bg-16 center-x relative marginb1 hover-fill'></i>
 
   </i>
 
-  <i id='pelvis' class='js-configurable r7 h9 w9 bg-black relative center-x hover-fill'></i>
+  <i id='pelvis' class='js-configurable r7 h9 w9 bg-16 relative center-x hover-fill'></i>
 
   <i id='leg-container-left' class='margint1-n center-x w10 hover-fill'>
-    <i id='upper-leg-left' class='js-configurable r2 h10 w4 a-l marginl2-n rotate1 bg-black'>
-      <i id='lower-leg-left' class='js-configurable r2 h12 w4 margint1 offset-top rotate1-n bg-black'>
-        <i id='foot-left' class='js-configurable h4 w6 r3 a-br bg-black'></i>
+    <i id='upper-leg-left' class='js-configurable r2 h10 w4 a-l marginl2-n rotate1 bg-16'>
+      <i id='lower-leg-left' class='js-configurable r2 h12 w4 margint1 offset-top rotate1-n bg-16'>
+        <i id='foot-left' class='js-configurable h4 w6 r3 a-br bg-16'></i>
       </i>
     </i>
   </i>
 
   <i id='leg-container-right' class='margint1-n center-x w10 hover-fill'>
-    <i id='upper-leg-right' class='js-configurable r2 h10 w4 a-r marginr2-n rotate1-n bg-black'>
-      <i id='lower-leg-right' class='js-configurable r2 h12 w4 margint1 offset-top rotate1 bg-black'>
-        <i id='foot-right' class='js-configurable h4 w6 r3 a-bl bg-black'></i>
+    <i id='upper-leg-right' class='js-configurable r2 h10 w4 a-r marginr2-n rotate1-n bg-16'>
+      <i id='lower-leg-right' class='js-configurable r2 h12 w4 margint1 offset-top rotate1 bg-16'>
+        <i id='foot-right' class='js-configurable h4 w6 r3 a-bl bg-16'></i>
       </i>
     </i>
   </i>
 </i>
 <div class='js-form'></div>
 
-<script type='text/template' class='js-template'>
+<script type='text/template' class='js-form-template'>
 
-  <div id='configure-<%= element %>' class='r1 form f-tr marginr4 margint4 border-black'>
-    <label>Height</label>
-    <a href='#' class='js-height-up button toggle'></a>
-    <a href='#' class='js-height-down button toggle'></a>
+  <div id='form-<%= element %>' class='js-fields r1 form f-tr marginr4 margint4 border-black'>
   </div>
+</script>
+
+<script type='text/template' class='js-field-template'>
+  <div class='js-field' id='field-<%=attribute%>'>
+    <div><%=attribute%></div>
+    <a href='#' class='js-input js-up button toggle'></a>
+    <a href='#' class='js-input js-down button toggle'></a>
+  <div>
 </script>
 
 </body>

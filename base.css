@@ -216,3 +216,24 @@ i {
 .rb2 { border-bottom-left-radius: 2vmin; border-bottom-right-radius: 2vmin; }
 .rb3 { border-bottom-left-radius: 3vmin; border-bottom-right-radius: 3vmin; }
 .rb4 { border-bottom-left-radius: 4vmin; border-bottom-right-radius: 4vmin; }
+
+/* Colors adapted from http://clrs.cc / @mrmrs / MIT License
+-------------------------------------------------*/
+
+.bg-1  { background-color: #001F3F; }
+.bg-2  { background-color: #0074D9; }
+.bg-3  { background-color: #7FDBFF; }
+.bg-4  { background-color: #39CCCC; }
+.bg-5  { background-color: #3D9970; }
+.bg-6  { background-color: #2ECC40; }
+.bg-7  { background-color: #01FF70; }
+.bg-8  { background-color: #FFDC00; }
+.bg-9  { background-color: #FF851B; }
+.bg-10 { background-color: #FF4136; }
+.bg-11 { background-color: #F012BE; }
+.bg-12 { background-color: #B10DC9; }
+.bg-13 { background-color: #85144B; }
+.bg-14 { background-color: #fff; }
+.bg-15 { background-color: #aaa; }
+.bg-16 { background-color: #ddd; }
+.bg-17 { background-color: #111; }
