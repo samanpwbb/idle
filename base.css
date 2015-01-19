@@ -10,6 +10,25 @@ i { display: block; position: absolute;}
 .center-v { top: 50%; transform: translateY(-50%); }
 .center-h { left: 0; right: 0; margin-left: auto; margin-right: auto;}
 
+[class*='f-']  { position: fixed; }
+.f-r  { top:    0; right:  0; bottom: 0;            }
+.f-t  { top:    0; right:  0;            left:   0; }
+.f-tl { top:    0;                       left:   0; }
+.f-tr { top:    0; right:  0;                       }
+.f-b  {            right:  0; bottom: 0; left:   0; }
+.f-bl {                       bottom: 0; left:   0; }
+.f-br {            right:  0; bottom: 0;            }
+
+[class*='a-']  { position: absolute; }
+.a-r  { top:    0; right:  0; bottom: 0;            }
+.a-tr { top:    0; right:  0;                       }
+.a-t  { top:    0; right:  0;            left:   0; }
+.a-tl { top:    0;                       left:   0; }
+.a-l  { top:    0;            bottom: 0; left:   0; }
+.a-b  {            right:  0; bottom: 0; left:   0; }
+.a-br {            right:  0; bottom: 0;            }
+.a-bl {                       bottom: 0; left:   0; }
+
 .h1  { height: 1vmin;}
 .h3  { height: 3vmin;}
 .h4  { height: 4vmin;}
