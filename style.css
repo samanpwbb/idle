@@ -1,37 +1,14 @@
 /* lots of weird interaction possibilities, especially with
 some class toggling in javascript */
-[class*='bg-'] {
-transition:background-color .25s;
-}
-.hover-fill:hover [class*='bg-'],
-.hover-fill[class*='bg-']:hover {
-  background-color: #0074D9;
-}
-
-.offset-top {
-  top: 100%;
-}
-
-.offset-bottom {
-  bottom: 100%;
-}
-
-i.body-container {
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-  left: 0;
-  right: 0;
-  margin: auto;
-}
+.hover-fill:hover [class*='bg-']:not(.no-hover),
+.hover-fill[class*='bg-']:hover:not(.no-hover) { background-color: #0074D9; }
+.no-hover { pointer-events: none;}
 
 .chest {
   -webkit-animation: ease-in-out breathe-grow 1.5s .25s infinite alternate backwards;
-  margin-bottom: 1vmin;
 }
 
 .head {
-  margin-bottom: 1vmin;
   -webkit-animation: ease-in-out breathe 1.5s .0s infinite alternate backwards;
 }
 
@@ -39,71 +16,19 @@ i.body-container {
   -webkit-animation: ease-in-out breathe 1.5s .5s infinite alternate backwards;
 }
 
-.upper-arm {
-  transform-origin: top center;
-  top: 1vmin;
-}
-
-.upper-arm.left {
-  left: -4vmin;
-}
-
-.upper-arm.right {
-  right: -4vmin;
-}
-
-.lower-arm {
-  transform-origin: top center;
-}
+.upper-arm { transform-origin: top center; }
+.lower-arm { transform-origin: top center; }
 
 .lower-arm.left {
-  bottom: -9vmin;
+  -webkit-animation: ease-in-out arm-wiggle-left 1.5s 0s infinite alternate backwards;
 }
 
 .lower-arm.right {
-  bottom: -9vmin;
+  -webkit-animation: ease-in-out arm-wiggle-right 1.5s 0s infinite alternate backwards;
 }
 
-.hand {
-  bottom: -5vmin;
-}
-
-.leg-container {
-  margin-top: -1vmin;
-}
-
-.upper-leg {
-  transform-origin: top center;
-}
-
-.upper-leg.left {
-  left: -2vmin;
-}
-
-.upper-leg.right {
-  right: -2vmin;
-}
-
-.lower-leg {
-  transform-origin: top center;
-  margin-top: 1vmin;
-}
-
-.lower-leg.left {
-  left: .5vmin;
-}
-
-.lower-leg.right {
-  right: .5vmin;
-}
-
-.foot {
-  bottom: -1vmin;
-}
-
-.eye {
-  background-color: white;
-}
+.upper-leg { transform-origin: top center; }
+.lower-leg { transform-origin: top center; }
 
 @-webkit-keyframes breathe {
   0%   { transform: translateY(-.5vmin); }
@@ -113,4 +38,14 @@ i.body-container {
 @-webkit-keyframes breathe-grow {
   0%   { transform: translateY(-.5vmin) scale(1.025); }
   100% { transform: translateY(-0vmin) scale(1); }
+}
+
+@-webkit-keyframes arm-wiggle-left {
+  0%   { transform: rotate(-12deg); }
+  100% { transform: rotate(-16deg); }
+}
+
+@-webkit-keyframes arm-wiggle-right {
+  0%   { transform: rotate(12deg); }
+  100% { transform: rotate(16deg); }
 }
