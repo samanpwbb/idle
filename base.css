@@ -17,11 +17,15 @@ i {
 /* this is sloppy */
 i.relative { position: relative;}
 
+/* Positioning
+-------------------------------------------------*/
+
 .center-y { top: 50%; transform: translateY(-50%); }
 .center-x { left: 0; right: 0; margin-left: auto; margin-right: auto;}
 
 .offset-top { top: 100%; }
 .offset-bottom { bottom: 100%; }
+
 
 [class*='f-']  { position: fixed; }
 .f-r  { top:    0; right:  0; bottom: 0;            }
@@ -41,6 +45,9 @@ i.relative { position: relative;}
 .a-b  {            right:  0; bottom: 0; left:   0; }
 .a-br {            right:  0; bottom: 0;            }
 .a-bl {                       bottom: 0; left:   0; }
+
+/* Rotation
+-------------------------------------------------*/
 
 .rotate1  { transform: rotate(12deg);}
 .rotate2  { transform: rotate(24deg);}
@@ -104,6 +111,9 @@ i.relative { position: relative;}
 .rotate29-n { transform: rotate(-348deg);}
 .rotate30-n { transform: rotate(-360deg);}
 
+/* Sizing
+-------------------------------------------------*/
+
 .h1  { height: 1vmin;}
 .h3  { height: 3vmin;}
 .h4  { height: 4vmin;}
@@ -122,6 +132,26 @@ i.relative { position: relative;}
 .h25 { height: 25vmin;}
 .h30 { height: 30vmin;}
 .h35 { height: 35vmin;}
+
+.w1  { width: 1vmin;}
+.w3  { width: 3vmin;}
+.w4  { width: 4vmin;}
+.w5  { width: 5vmin;}
+.w6  { width: 6vmin;}
+.w7  { width: 7vmin;}
+.w8  { width: 8vmin;}
+.w9  { width: 9vmin;}
+.w10 { width: 10vmin;}
+.w11 { width: 11vmin;}
+.w12 { width: 12vmin;}
+.w15 { width: 15vmin;}
+.w20 { width: 20vmin;}
+.w25 { width: 25vmin;}
+.w30 { width: 30vmin;}
+.w35 { width: 35vmin;}
+
+/* Margins
+-------------------------------------------------*/
 
 .marginl1 { margin-left: 1vmin;}
 .marginl2 { margin-left: 2vmin;}
@@ -163,30 +193,16 @@ i.relative { position: relative;}
 .marginb3-n { margin-bottom: -3vmin;}
 .marginb4-n { margin-bottom: -4vmin;}
 
-.w1  { width: 1vmin;}
-.w3  { width: 3vmin;}
-.w4  { width: 4vmin;}
-.w5  { width: 5vmin;}
-.w6  { width: 6vmin;}
-.w7  { width: 7vmin;}
-.w8  { width: 8vmin;}
-.w9  { width: 9vmin;}
-.w10 { width: 10vmin;}
-.w11 { width: 11vmin;}
-.w12 { width: 12vmin;}
-.w15 { width: 15vmin;}
-.w20 { width: 20vmin;}
-.w25 { width: 25vmin;}
-.w30 { width: 30vmin;}
-.w35 { width: 35vmin;}
+/* Border radius
+-------------------------------------------------*/
+
+.dot { border-radius: 100%;}
 
 .r1 { border-radius: 1vmin;}
 .r2 { border-radius: 2vmin;}
 .r3 { border-radius: 3vmin;}
 .r4 { border-radius: 4vmin;}
 .r6 { border-radius: 6vmin;}
-
-.dot { border-radius: 100%;}
 
 .r1-t { border-top-left-radius: 1vmin; border-top-right-radius: 1vmin; }
 .r2-t { border-top-left-radius: 2vmin; border-top-right-radius: 2vmin; }
