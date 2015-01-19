@@ -4,34 +4,56 @@ some class toggling in javascript */
 .hover-fill[class*='bg-']:hover:not(.no-hover) { background-color: #0074D9; }
 .no-hover { pointer-events: none;}
 
+.form {
+  width: 200px;
+  height: 200px;
+}
+
+.border-black {
+  border: 1px solid #222;
+}
+
+.button {
+  display: inline-block;
+  background-color: blue;
+  height: 20px;
+  width: 20px;
+}
+
 /* Tranforms
 -------------------------------------------------*/
 
-.upper-arm,
-.lower-arm,
-.upper-leg,
-.lower-leg { transform-origin: top center; }
+[id*='lower-leg-'],
+[id*='upper-leg-'],
+[id*='lower-arm-'],
+[id*='upper-arm-'] {
+  transform-origin: top center;
+}
 
 /* Animation
 -------------------------------------------------*/
-.chest {
+#chest {
   -webkit-animation: ease-in-out breathe-grow 1.5s .25s infinite alternate backwards;
 }
 
-.head {
+#head {
   -webkit-animation: ease-in-out breathe 1.5s .0s infinite alternate backwards;
 }
 
-.arm-container {
+[id*='arm-container-'] {
   -webkit-animation: ease-in-out breathe 1.5s .5s infinite alternate backwards;
 }
 
-.lower-arm.left {
+#lower-arm-left {
   -webkit-animation: ease-in-out arm-wiggle-left 1.5s 0s infinite alternate backwards;
 }
 
-.lower-arm.right {
+#lower-arm-right {
   -webkit-animation: ease-in-out arm-wiggle-right 1.5s 0s infinite alternate backwards;
+}
+
+#eye {
+  -webkit-animation: ease-in-out blink 2s 2s infinite alternate forwards;
 }
 
 @-webkit-keyframes breathe {
@@ -52,4 +74,10 @@ some class toggling in javascript */
 @-webkit-keyframes arm-wiggle-right {
   0%   { transform: rotate(12deg); }
   100% { transform: rotate(16deg); }
+}
+
+@-webkit-keyframes blink {
+  0%   { transform: scaleY(0); }
+  10%  { transform: scaleY(1); }
+  100% { transform: scaleY(1); }
 }
