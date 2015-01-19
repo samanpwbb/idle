@@ -3,7 +3,7 @@ some class toggling in javascript */
 .bg-green {
 transition:background-color .25s;
 }
-.hover-fill:hover *,
+.hover-fill:hover .bg-green,
 .hover-fill.bg-green:hover {
   background-color: #0074D9;
 }
