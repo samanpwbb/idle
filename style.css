@@ -37,12 +37,10 @@ i.body-container {
 
 .upper-arm.left {
   left: -4vmin;
-  transform: rotate(25deg);
 }
 
 .upper-arm.right {
   right: -4vmin;
-  transform: rotate(-25deg);
 }
 
 .lower-arm {
@@ -51,12 +49,10 @@ i.body-container {
 
 .lower-arm.left {
   bottom: -9vmin;
-  transform: rotate(-10deg);
 }
 
 .lower-arm.right {
   bottom: -9vmin;
-  transform: rotate(10deg);
 }
 
 .hand {
@@ -78,38 +74,27 @@ i.body-container {
 
 .upper-leg.left {
   left: -2vmin;
-  transform: rotate(10deg);
 }
 
 .upper-leg.right {
   right: -2vmin;
-  transform: rotate(-10deg);
 }
 
 .lower-leg {
+  transform-origin: top center;
   bottom: -13vmin;
 }
 
 .lower-leg.left {
   left: .5vmin;
-  transform: rotate(-10deg);
 }
 
 .lower-leg.right {
   right: .5vmin;
-  transform: rotate(10deg);
 }
 
 .foot {
   bottom: -1vmin;
-}
-
-.foot.right {
-  left: 0;
-}
-
-.foot.left {
-  right: 0;
 }
 
 @-webkit-keyframes breathe {
