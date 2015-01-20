@@ -1,8 +1,10 @@
 $(document).ready(function() {
 
   /* TODO
-  Design a bunch of special parts.
-  Shift + click for multi select???
+  1. Design a bunch of special parts (with special[1-9] + class toggle + psuedo elements)
+  2. Let user save? URL parameters?
+  3. Better form inputs.
+  4. Shift + click for multi select?
   */
 
   var formTemplate = _.template(document.getElementsByClassName('js-form-template')[0].innerHTML),
@@ -61,13 +63,11 @@ $(document).ready(function() {
   $('.js-configurable').on('click', function(ev) {
 
     var prevForm = document.getElementsByClassName('js-fields')[0];
-
     if (prevForm) {
       removeForm(ev, prevForm);
     } else {
       makeForm(ev);
     }
-
     ev.stopImmediatePropagation();
 
   });
