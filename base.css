@@ -24,6 +24,20 @@ i {
           transition:all .25s;
 }
 
+.animate1 {
+  -webkit-transition:all .15s;
+     -moz-transition:all .15s;
+      -ms-transition:all .15s;
+          transition:all .15s;
+}
+
+.animate2 {
+  -webkit-transition:all .15s .05s;
+     -moz-transition:all .15s .05s;
+      -ms-transition:all .15s .05s;
+          transition:all .15s .05s;
+}
+
 /* this is sloppy */
 .relative { position: relative;}
 .inline { display: inline-block;}
@@ -214,12 +228,10 @@ i {
 /* Border radius
 -------------------------------------------------*/
 
-.r1 { border-radius: 1vmin;}
+.r1 { border-radius: 0vmin;}
 .r2 { border-radius: 2vmin;}
-.r3 { border-radius: 3vmin;}
-.r4 { border-radius: 4vmin;}
-.r6 { border-radius: 6vmin;}
-.r7 { border-radius: 100%;}
+.r3 { border-radius: 4vmin;}
+.r4 { border-radius: 100%;}
 
 .rt1 { border-top-left-radius: 1vmin; border-top-right-radius: 1vmin; }
 .rt2 { border-top-left-radius: 2vmin; border-top-right-radius: 2vmin; }

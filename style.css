@@ -9,7 +9,7 @@
 -------------------------------------------------*/
 
 .configurable.hover {
-  box-shadow: 0 0 0 5px white, 0 0 0 15px rgba(0,0,0,.2);
+  box-shadow: 0 0 0 5px white, 0 0 0 10px rgba(0,0,0,.2);
   z-index: 100;
   cursor: pointer;
 }
@@ -28,16 +28,56 @@
 }
 
 .form {
+  background-color: rgba(0,0,0,.5);
   box-shadow: 0 0 30px 0 rgba(0,0,0,.1);
-  border-radius: 3px;
-  width: 240px;
+  color: white;
+  border-radius: 6px;
+  width: 200px;
   padding: 20px;
   position: fixed; right: 20px;
+  opacity: 0;
+  transform: scale(.8);
+}
+
+.form.in {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.form .dot {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  z-index: -1;
+  top: auto;
+  bottom: 20px;
+  border-radius: 50%;
+  left: -20px;
+  background-color: rgba(0,0,0,.5);
+  pointer-events: none;
+  transform: scale(0);
+  opacity: 0;
+}
+
+.form.istop .dot {
+  bottom: auto;
+  top: 20px;
+}
+
+.form.isright .dot {
+  left: auto;
+  right: -20px;
+}
+
+.form.in .dot {
+  transform: scale(1);
+  opacity: 1;
 }
 
 .caps { text-transform: uppercase;}
 
-.field:not(:first-child) { margin-top: 10px;}
+.field:not(:first-of-type) { margin-top: 10px;}
 
 .label { vertical-align: top;}
 
@@ -50,7 +90,7 @@
 }
 
 .button.up {
-  background-color: #888;
+  background-color: #39CCCC;
 }
 
 .button.up:hover {
@@ -58,7 +98,7 @@
 }
 
 .button.down {
-  background-color: #888;
+  background-color: #FF851B;
 }
 
 .button.down:hover {
