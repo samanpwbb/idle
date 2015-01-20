@@ -23,15 +23,6 @@ $(document).ready(function() {
   var form = _.template($('.js-form-template').html());
   var field = _.template($('.js-field-template').html());
 
-  $('.js-configurable').mouseenter(function(ev) {
-      $('i').removeClass('hover');
-      $(ev.currentTarget).addClass('hover');
-  });
-
-  $('.js-configurable').mouseleave(function(ev) {
-      $(ev.currentTarget).removeClass('hover');
-  });
-
   $('.js-configurable').on('click', function(ev) {
 
     if ($(ev.currentTarget).hasClass('active')) {
