@@ -32,8 +32,13 @@ $(document).ready(function() {
       'min':-4,
       'max':4
     },
-    'vertical space': {
-      'regex': /marginb[0-9\-]+/,
+    'vertical gap': {
+      'regex': /margin[b|t][0-9\-]+/,
+      'min':-4,
+      'max':4
+    },
+    'horizontal gap': {
+      'regex': /margin[l|r][0-9\-]+/,
       'min':-4,
       'max':4
     }

@@ -14,14 +14,14 @@
 <i id='body-container' class='w10 contain center-x center-y'>
 
   <i class='offset-bottom center-x'>
-    <i id='head' class='js-configurable configurable r6 h10 w8 center-x bg16 marginb1 relative '>
+    <i id='head' class='js-configurable configurable r6 h10 w8 center-x2 bg16 marginb1 relative'>
       <i id='face' class='a-l center-x'>
         <i id='eye' class='center-x center-y r7 h3 w3 bg14 no-hover'></i>
       </i>
     </i>
 
     <i id='arm-container-left' class='center-x '>
-      <i id='upper-arm-left' class='js-configurable configurable r2 a-tl h9 w4 rotate2 marginl-4 bg16'>
+      <i id='upper-arm-left' class='js-configurable margint0 configurable r2 a-tl h9 w4 rotate2 marginl-4 bg16'>
         <i id='lower-arm-left' class='js-configurable configurable r2 h8 w4 margint1 offset-top a-br bg16'>
           <i id='hand-left' class='center-x js-configurable configurable h4 w4 offset-top margint1 r7 bg16 rotate0'></i>
         </i>
@@ -29,7 +29,7 @@
     </i>
 
     <i id='arm-container-right' class='center-x '>
-      <i id='upper-arm-right' class='js-configurable configurable r2 a-tr h9 w4 rotate-2 marginr-4 bg16'>
+      <i id='upper-arm-right' class='js-configurable margint0 configurable r2 a-tr h9 w4 rotate-2 marginr-4 bg16'>
         <i id='lower-arm-right' class='js-configurable configurable r2 h8 w4 offset-top margint1 a-bl bg16'>
           <i id='hand-right' class='center-x js-configurable configurable h4 w4 offset-top margint1 r7 bg16 rotate-0'></i>
         </i>
@@ -62,15 +62,15 @@
 
 <script type='text/template' class='js-form-template'>
 
-  <div id='form-<%= element %>' class='caps js-fields form f-tr marginr4 margint4'>
+  <div id='form-<%= element %>' class='center-y caps bg16 js-fields form'>
   </div>
 </script>
 
 <script type='text/template' class='js-field-template'>
-  <div class='js-field' id='field-<%=attribute%>'>
-    <div class='space-top1'><%=attribute%></div>
-    <a href='#' class='js-input down js-down button toggle'></a>
-    <a href='#' class='js-input up js-up button toggle'></a>
+  <div class='cf field js-field' id='field-<%=attribute%>'>
+    <a href='#' class='inline js-input down js-down button toggle'></a>
+    <a href='#' class='inline js-input up js-up button toggle'></a>
+    <div class='inline label'><%=attribute%></div>
   <div>
 </script>
 

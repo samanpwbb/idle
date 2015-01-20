@@ -1,14 +1,19 @@
 /* CSS designed for drawing */
 
-html {
-  font: normal 15px/20px Menlo, consolas, monospace;
+body {
+  font: normal 12px/20px Menlo, consolas, monospace;
   box-sizing: border-box;
-  color: #aaa;
+  color: #888;
 }
 
 *, *:before, *:after { box-sizing: inherit;}
 
 body { position: fixed; width: 100%; height: 100%;}
+
+
+.cf:before,
+.cf:after { display: table; }
+.cf:after { clear: both; }
 
 i {
   display: block;
@@ -22,7 +27,7 @@ i {
 /* this is sloppy */
 .relative { position: relative;}
 .inline { display: inline-block;}
-
+.fl { float: left;}
 /* Positioning
 -------------------------------------------------*/
 

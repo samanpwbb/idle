@@ -28,29 +28,40 @@
 }
 
 .form {
+  border-radius: 3px 0 0 3px;
   width: 200px;
-  height: 200px;
+  padding: 20px;
+  position: fixed; right: 0;
 }
 
 .caps { text-transform: uppercase;}
 
-.space-top1 { margin-top: 10px;}
+.field:not(:first-child) { margin-top: 10px;}
+
+.label { vertical-align: top;}
 
 .button {
-  margin-top: 10px;
-  border-radius: 50%;
-  display: inline-block;
+  vertical-align: top;
   background-color: blue;
   height: 20px;
   width: 20px;
+  border-radius: 50%;
 }
 
 .button.up {
-  background-color: #0074d9;
+  background-color: #888;
+}
+
+.button.up:hover {
+  background-color: #aaa;
 }
 
 .button.down {
-  background-color: #FF4136;
+  background-color: #888;
+}
+
+.button.down:hover {
+  background-color: #aaa;
 }
 
 /* Tranforms
@@ -70,7 +81,7 @@
 }
 
 #head {
-  -webkit-animation: ease-in-out breathe 1.5s .0s infinite alternate backwards;
+  -webkit-animation: ease-in-out breathe-head 1.5s .0s infinite alternate backwards;
 }
 
 [id^='arm-container-'] {
@@ -92,6 +103,12 @@
 @-webkit-keyframes breathe {
   0%   { transform: translateY(-.5vmin); }
   100% { transform: translateY(-0vmin); }
+}
+
+/* this is ugly, translate is so stupid */
+@-webkit-keyframes breathe-head {
+  0%   { transform: translateY(-.5vmin) translateX(-50%); }
+  100% { transform: translateY(-0vmin) translateX(-50%); }
 }
 
 @-webkit-keyframes breathe-grow {
