@@ -73,6 +73,8 @@ $(document).ready(function() {
 
       $('.js-form').html(form({element: ev.currentTarget.id}));
 
+      $('.js-fields').css('top',Math.floor($(ev.currentTarget).offset().top));
+
       var bodyPart = ev.currentTarget;
 
       for (var key in config) {

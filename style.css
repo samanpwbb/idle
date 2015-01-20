@@ -23,15 +23,27 @@
   box-shadow: 0 0 0 5px white, 0 0 0 10px rgba(0,0,0,.5);
 }
 
+.configurable.active:before {
+  /* draw a line from here to the control panel */
+  content: '';
+  position: absolute;
+  width: 50vmin;
+  height: 4px;
+  z-index: -1;
+  top: 50%;
+  background-color: #dddddd;
+  pointer-events: none;
+}
+
 .no-hover {
   pointer-events: none;
 }
 
 .form {
-  border-radius: 3px 0 0 3px;
+  border-radius: 3px;
   width: 200px;
   padding: 20px;
-  position: fixed; right: 0;
+  position: fixed; right: 20px;
 }
 
 .caps { text-transform: uppercase;}
