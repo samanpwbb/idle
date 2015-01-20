@@ -1,21 +1,41 @@
 $(document).ready(function() {
 
+  /* TODO
+  Design a bunch of special parts.
+  Shift + click for multi select???
+  */
+
   /* Configure form settings */
   var config = {
     'height': {
-      'regex': /h[0-9]+/,
+      'regex': /h[0-9\-]+/,
       'min':4,
       'max':12
     },
     'width': {
-      'regex': /w[0-9]+/,
+      'regex': /w[0-9\-]+/,
       'min':4,
       'max':12
     },
     'color': {
-      'regex': /bg-[0-9]+/,
+      'regex': /bg[0-9\-]+/,
       'min':1,
       'max':17
+    },
+    'radius': {
+      'regex': /r[0-9\-]+/,
+      'min':1,
+      'max':7
+    },
+    'rotate': {
+      'regex': /rotate[0-9\-]+/,
+      'min':-4,
+      'max':4
+    },
+    'vertical space': {
+      'regex': /marginb[0-9\-]+/,
+      'min':-4,
+      'max':4
     }
   };
 
@@ -54,7 +74,7 @@ $(document).ready(function() {
         var classList = ev.currentTarget.className;
         var match = classList.search(config[key].regex);
         if (match > -1) {
-          $('.js-fields').append(field({ attribute: key}));
+          $('.js-fields').append(field({ attribute: key }));
         }
       };
 
@@ -80,7 +100,7 @@ $(document).ready(function() {
   };
 
   var getNumberFromClass = function(className) {
-    var index = className.search(/[0-9]/);
+    var index = className.search(/[0-9\-]/);
     return parseInt(className.substr(index));
   };
 
@@ -103,7 +123,7 @@ $(document).ready(function() {
 
     $(el).removeClass(currentClass).addClass(newClass);
 
-    /* exception for chest :( */
+    /* exception for chest :( - this is ugly */
     if (el.id === 'chest' && attribute === 'width') {
       $('#body-container').removeClass(currentClass).addClass(newClass);
     };
