@@ -1,5 +1,14 @@
 
-.configurable:hover:not(.active) {
+/* Dirty
+-------------------------------------------------*/
+#body-container {
+  min-width: 10vmin;
+}
+
+/* Interaction
+-------------------------------------------------*/
+
+.configurable.hover:not(.active) {
   box-shadow: 0 0 0 10px white, 0 0 0 15px #FF851B;
 }
 .configurable.active {

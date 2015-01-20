@@ -23,15 +23,29 @@ $(document).ready(function() {
   var form = _.template($('.js-form-template').html());
   var field = _.template($('.js-field-template').html());
 
+  $('.js-configurable').mouseenter(function(ev) {
+    $('i').removeClass('hover');
+    $(ev.currentTarget).addClass('hover');
+    ev.stopImmediatePropagation();
+  });
+
+  $('.js-configurable').mouseleave(function(ev) {
+    $(ev.currentTarget).removeClass('hover');
+    ev.stopImmediatePropagation();
+  });
+
   $('.js-configurable').on('click', function(ev) {
 
     if ($(ev.currentTarget).hasClass('active')) {
+
       $(ev.currentTarget).removeClass('active');
       $('.js-form').html('');
+
     } else {
 
       $('i').removeClass('active');
       $(ev.currentTarget).addClass('active');
+
       $('.js-form').html(form({element: ev.currentTarget.id}));
 
       var bodyPart = ev.currentTarget;
@@ -51,9 +65,12 @@ $(document).ready(function() {
         var attribute = target.parents('.js-field').attr('id').split('field-').pop();
         var increment = target.hasClass('js-up');
         changeClass(bodyPart, attribute, increment);
+
         return false;
       });
     }
+
+    ev.stopImmediatePropagation();
 
   });
 
@@ -85,6 +102,13 @@ $(document).ready(function() {
     var newClass = currentClass.replace(currentNum,newNum);
 
     $(el).removeClass(currentClass).addClass(newClass);
+
+    /* exception for chest :( */
+    if (el.id === 'chest' && attribute === 'width') {
+      $('#body-container').removeClass(currentClass).addClass(newClass);
+    };
+
+    return false;
   };
 
 });
