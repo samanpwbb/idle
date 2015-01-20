@@ -80,7 +80,7 @@ $(document).ready(function() {
       /* totally unfinished */
       $('.js-fields')
         .css('top',(topSpace < 400) ? topSpace : 'auto')
-        .css('left',leftSpace + 80);
+        .css('left',leftSpace + Math.floor(ev.currentTarget.offsetWidth) + 20);
 
       var bodyPart = ev.currentTarget;
 
