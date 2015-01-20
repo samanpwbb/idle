@@ -9,7 +9,7 @@
 -------------------------------------------------*/
 
 .configurable.hover {
-  box-shadow: 0 0 0 5px white, 0 0 0 20px rgba(0,0,0,.2);
+  box-shadow: 0 0 0 5px white, 0 0 0 15px rgba(0,0,0,.2);
   z-index: 100;
   cursor: pointer;
 }
@@ -23,25 +23,14 @@
   box-shadow: 0 0 0 5px white, 0 0 0 10px rgba(0,0,0,.5);
 }
 
-.configurable.active:before {
-  /* draw a line from here to the control panel */
-  content: '';
-  position: absolute;
-  width: 50vmin;
-  height: 4px;
-  z-index: -1;
-  top: 50%;
-  background-color: #dddddd;
-  pointer-events: none;
-}
-
 .no-hover {
   pointer-events: none;
 }
 
 .form {
+  border: 4px solid #888888;
   border-radius: 3px;
-  width: 200px;
+  width: 240px;
   padding: 20px;
   position: fixed; right: 20px;
 }

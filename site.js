@@ -73,7 +73,14 @@ $(document).ready(function() {
 
       $('.js-form').html(form({element: ev.currentTarget.id}));
 
-      $('.js-fields').css('top',Math.floor($(ev.currentTarget).offset().top));
+      var topSpace = Math.floor($(ev.currentTarget).offset().top);
+
+      var leftSpace = Math.floor($(ev.currentTarget).offset().left);
+
+      /* totally unfinished */
+      $('.js-fields')
+        .css('top',(topSpace < 400) ? topSpace : 'auto')
+        .css('left',leftSpace + 80);
 
       var bodyPart = ev.currentTarget;
 
