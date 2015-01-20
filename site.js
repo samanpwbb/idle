@@ -1,10 +1,5 @@
 $(document).ready(function() {
 
-  /* TODO
-  1. Dynamically generate forms based on which attributes are available.
-  2. Add more forms
-  */
-
   /* Configure form settings */
   var config = {
     'height': {
@@ -28,29 +23,46 @@ $(document).ready(function() {
   var form = _.template($('.js-form-template').html());
   var field = _.template($('.js-field-template').html());
 
+  $('.js-configurable').mouseenter(function(ev) {
+      $('i').removeClass('hover');
+      $(ev.currentTarget).addClass('hover');
+  });
+
+  $('.js-configurable').mouseleave(function(ev) {
+      $(ev.currentTarget).removeClass('hover');
+  });
+
   $('.js-configurable').on('click', function(ev) {
 
-    $('.js-form').html(form({element: ev.currentTarget.id}));
+    if ($(ev.currentTarget).hasClass('active')) {
+      $(ev.currentTarget).removeClass('active');
+      $('.js-form').html('');
+    } else {
 
-    var bodyPart = ev.currentTarget;
+      $('i').removeClass('active');
+      $(ev.currentTarget).addClass('active');
+      $('.js-form').html(form({element: ev.currentTarget.id}));
 
-    for (var key in config) {
-      var classList = ev.currentTarget.className;
-      var match = classList.search(config[key].regex);
-      if (match > -1) {
-        $('.js-fields').append(field({ attribute: key}));
-      }
-    };
+      var bodyPart = ev.currentTarget;
 
-    /* Event handlers */
-    $('.js-input').on('click', function(ev) {
-      var target = $(ev.currentTarget);
-      var bodyPart = document.getElementById($('.js-fields').attr('id').split('form-').pop());
-      var attribute = target.parents('.js-field').attr('id').split('field-').pop();
-      var increment = target.hasClass('js-up');
-      changeClass(bodyPart, attribute, increment);
-      return false;
-    });
+      for (var key in config) {
+        var classList = ev.currentTarget.className;
+        var match = classList.search(config[key].regex);
+        if (match > -1) {
+          $('.js-fields').append(field({ attribute: key}));
+        }
+      };
+
+      /* Event handlers */
+      $('.js-input').on('click', function(ev) {
+        var target = $(ev.currentTarget);
+        var bodyPart = document.getElementById($('.js-fields').attr('id').split('form-').pop());
+        var attribute = target.parents('.js-field').attr('id').split('field-').pop();
+        var increment = target.hasClass('js-up');
+        changeClass(bodyPart, attribute, increment);
+        return false;
+      });
+    }
 
   });
 
@@ -68,8 +80,6 @@ $(document).ready(function() {
     var currentClass = getClassFromList(el,config[attribute].regex);
     var currentNum = getNumberFromClass(currentClass);
     var newNum = currentNum + (increment ? 1 : -1);
-
-    console.log(el);
 
     if (increment) {
       if (currentNum >= config[attribute].max) {

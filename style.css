@@ -1,8 +1,15 @@
-/* lots of weird interaction possibilities, especially with
-some class toggling in javascript */
-.hover-fill:hover [class*='bg-']:not(.no-hover),
-.hover-fill[class*='bg-']:hover:not(.no-hover) { background-color: #0074D9; }
-.no-hover { pointer-events: none;}
+
+.configurable.hover:not(.active) {
+  background: rgba(0,0,0,.25);
+}
+.configurable.active {
+  box-shadow: 0 0 10px 10px rgba(0,0,0,.25);
+  z-index: 100;
+}
+
+.no-hover {
+  pointer-events: none;
+}
 
 .form {
   width: 200px;
