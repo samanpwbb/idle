@@ -133,10 +133,10 @@ $(document).ready(function() {
     /* Event handlers */
     $('.js-input').on('click', function(ev) {
       var target = $(ev.currentTarget);
-      var bodyPartName = document.getElementById(form.getAttribute('id').split('form-').pop());
+      var bodyPartElement = document.getElementById(form.getAttribute('id').split('form-').pop());
       var attribute = target.parents('.js-field').attr('id').split('field-').pop();
       var increment = target.hasClass('js-up');
-      changeClass(bodyPartName, attribute, increment);
+      changeClass(bodyPartElement, attribute, increment);
       return false;
     });
 
@@ -170,10 +170,24 @@ $(document).ready(function() {
 
     var newClass = currentClass.replace(currentNum,newNum);
 
-    $(el).removeClass(currentClass).addClass(newClass);
+    el.classList.remove(currentClass);
+    el.classList.add(newClass);
+
+    /* Match leg heights to each other */
+    var bodyPart = el.id;
+
+    if (bodyPart.indexOf('leg') > -1 && attribute === 'height') {
+      var pair = 'leg-' +
+        (bodyPart.indexOf('lower') > -1 ? 'lower-' : 'upper-') +
+        (bodyPart.indexOf('left') > -1 ? 'right' : 'left');
+
+      document.getElementById(pair).classList.remove(currentClass);
+      document.getElementById(pair).classList.add(newClass);
+
+    };
 
     /* Exception for chest - this is ugly */
-    if (el.id === 'chest' && attribute === 'width') {
+    if (bodyPart.id === 'chest' && attribute === 'width') {
       var bodyContainer = document.getElementById('body-container');
       bodyContainer.classList.remove(currentClass);
       bodyContainer.classList.add(newClass);

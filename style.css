@@ -108,10 +108,10 @@
 /* Tranforms
 -------------------------------------------------*/
 
-[id^='lower-leg-'],
-[id^='upper-leg-'],
-[id^='lower-arm-'],
-[id^='upper-arm-'] {
+[id^='leg-lower-'],
+[id^='leg-upper-'],
+[id^='arm-lower-'],
+[id^='arm-upper-'] {
   transform-origin: top center;
 }
 
@@ -129,11 +129,11 @@
   -webkit-animation: ease-in-out breathe 1.5s .5s infinite alternate backwards;
 }
 
-#lower-arm-left {
+#arm-lower-left {
   -webkit-animation: ease-in-out arm-wiggle-left 1.5s 0s infinite alternate backwards;
 }
 
-#lower-arm-right {
+#arm-lower-right {
   -webkit-animation: ease-in-out arm-wiggle-right 1.5s 0s infinite alternate backwards;
 }
 
