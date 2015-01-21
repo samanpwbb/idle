@@ -1,11 +1,10 @@
 $(document).ready(function() {
 
   /* TODO
-  1. Design a bunch of special parts (with special[1-9] + class toggle + psuedo elements)
-  2. Let user save? URL parameters?
-  3. Better form inputs.
-  4. Shift + click for multi select?
-  5. Browser support.
+  1. Better form inputs.
+  2. Design a bunch of special parts (with special[1-9] + class toggle + psuedo elements)
+  3. Let user save? URL parameters?
+  4. Browser support.
   */
 
   var formTemplate = _.template(document.getElementsByClassName('js-form-template')[0].innerHTML),
@@ -118,9 +117,6 @@ $(document).ready(function() {
     var isTop = topSpace < window.innerHeight / 2;
     var isRight = rightSpace < window.innerWidth / 2;
 
-    if (isTop) form.classList.add('istop');
-    if (isRight) form.classList.add('isright');
-
     $('.js-fields')
       .css('top',isTop ? topSpace : 'auto')
       .css('bottom',!isTop ? window.innerHeight - (topSpace + bodyPart.offsetHeight) : 'auto')
@@ -128,6 +124,8 @@ $(document).ready(function() {
 
     window.requestAnimationFrame(function() {
       form.classList.add('in');
+      if (isTop) form.classList.add('istop');
+      if (isRight) form.classList.add('isright');
     });
 
     /* Event handlers */
@@ -180,14 +178,12 @@ $(document).ready(function() {
       var pair = 'leg-' +
         (bodyPart.indexOf('lower') > -1 ? 'lower-' : 'upper-') +
         (bodyPart.indexOf('left') > -1 ? 'right' : 'left');
-
       document.getElementById(pair).classList.remove(currentClass);
       document.getElementById(pair).classList.add(newClass);
-
     };
 
     /* Exception for chest - this is ugly */
-    if (bodyPart.id === 'chest' && attribute === 'width') {
+    if (bodyPart === 'chest' && attribute === 'width') {
       var bodyContainer = document.getElementById('body-container');
       bodyContainer.classList.remove(currentClass);
       bodyContainer.classList.add(newClass);

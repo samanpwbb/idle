@@ -43,7 +43,7 @@
   <i id='pelvis' class='js-configurable configurable r4 h9 w9 bg16 relative center-x2'></i>
 
   <i id='leg-container-left' class='margint-1 center-x w10 '>
-    <i id='leg-upper-left' class='js-configurable configurable r2 h10 w4 a-l marginl-2 rotate1 bg16'>
+    <i id='leg-upper-left' class='js-configurable configurable r2 margint0 h10 w4 a-l marginl-2 rotate1 bg16'>
       <i id='leg-lower-left' class='js-configurable configurable center-x r2 h12 w4 margint1 offset-top rotate-1 bg16'>
         <i id='foot-left' class='js-configurable configurable h4 w6 r3 a-br bg16'></i>
       </i>
@@ -51,7 +51,7 @@
   </i>
 
   <i id='leg-container-right' class='margint-1 center-x w10 '>
-    <i id='leg-upper-right' class='js-configurable configurable r2 h10 w4 a-r marginr-2 rotate-1 bg16'>
+    <i id='leg-upper-right' class='js-configurable configurable r2 h10 w4 a-r marginr-2 margint0 rotate-1 bg16'>
       <i id='leg-lower-right' class='js-configurable configurable center-x r2 h12 w4 margint1 offset-top rotate1 bg16'>
         <i id='foot-right' class='js-configurable configurable h4 w6 r3 a-bl bg16'></i>
       </i>
@@ -68,10 +68,10 @@
 
 <script type='text/template' class='js-field-template'>
   <div class='cf field js-field' id='field-<%=attribute%>'>
+    <div class='block label'><%=attribute%></div>
     <a href='#' class='inline js-input down js-down button toggle'></a>
     <a href='#' class='inline js-input up js-up button toggle'></a>
-    <div class='inline label'><%=attribute%></div>
-  <div>
+  </div>
 </script>
 
 </body>
