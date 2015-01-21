@@ -235,7 +235,7 @@ i {
 
 /* Colors adapted from http://clrs.cc / @mrmrs / MIT License
 -------------------------------------------------*/
-
+.bg0  { background-color: #DFAC81;}
 .bg1  { background-color: #001F3F; }
 .bg2  { background-color: #0074D9; }
 .bg3  { background-color: #7FDBFF; }
@@ -249,7 +249,7 @@ i {
 .bg11 { background-color: #F012BE; }
 .bg12 { background-color: #B10DC9; }
 .bg13 { background-color: #85144B; }
-.bg14 { background-color: #fff; }
+.bg14 { background-color: transparent; }
 .bg15 { background-color: #aaa; }
 .bg16 { background-color: #ddd; }
 .bg17 { background-color: #111; }

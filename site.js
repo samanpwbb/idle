@@ -2,9 +2,13 @@ $(document).ready(function() {
 
   /* TODO
   1. Better form inputs.
-  2. Design a bunch of special parts (with special[1-9] + class toggle + psuedo elements)
-  3. Let user save? URL parameters?
-  4. Browser support.
+  // List form types need serious cleanup / simplification
+       - Move all buttons into template
+       - non-color forms half width
+  2. Don't need regexes, can just use string matches
+  3. Design a bunch of special parts (with special[1-9] + class toggle + psuedo elements)
+  4. Let user save? URL parameters?
+  5. Browser support.
   */
 
   var formTemplate = _.template(document.getElementsByClassName('js-form-template')[0].innerHTML),
@@ -24,7 +28,8 @@ $(document).ready(function() {
         'color': {
           'regex': /bg[0-9\-]+/,
           'min':1,
-          'max':17
+          'max':17,
+          'form': 'list'
         },
         'radius': {
           'regex': /r[0-9]+/,
@@ -105,18 +110,19 @@ $(document).ready(function() {
     for (var key in config) {
       var classes = bodyPart.className;
       var match = classes.search(config[key].regex);
-
       if (match > -1) {
         form.innerHTML += fieldTemplate({ attribute: key });
       }
 
-      var field = document.getElementById('field-' + key);
-      var count = config[key].max - config[key].min;
+      if (config[key].form === 'list') {
+        var field = document.getElementById('field-' + key);
+        var count = config[key].max - config[key].min;
 
-      for (var i = 0;i <= count;i++ ) {
-        var buttonTemplate = "<a href='#' class='inline js-input js-" + i + " up button toggle'></a>";
-        field.innerHTML += buttonTemplate;
-      };
+        for (var i = 0;i <= count;i++ ) {
+          var buttonTemplate = "<a href='#' data-num='" + i + "' class='bg" + i + " button button-list js-list js-input'></a>";
+          field.innerHTML += buttonTemplate;
+        };
+      }
 
     };
 
@@ -143,8 +149,11 @@ $(document).ready(function() {
     $('.js-input').on('click', function(ev) {
       var target = $(ev.currentTarget);
       var attribute = target.parents('.js-field').attr('id').split('field-').pop();
-      var increment = target.hasClass('js-up');
-      changeClass(bodyPart, attribute, increment);
+      var increment = target.hasClass('js-up') ? 1 : -1;
+      if (target.hasClass('js-list')) {
+        var newNum = ev.currentTarget.dataset.num;
+      }
+      changeClass(bodyPart, attribute, increment, newNum);
       return false;
     });
 
@@ -161,19 +170,17 @@ $(document).ready(function() {
     return parseInt(className.substr(index));
   };
 
-  var changeClass = function(el, attribute, increment) {
+  var changeClass = function(el, attribute, increment, newNum) {
     var currentClass = getClassFromList(el,config[attribute].regex);
     var currentNum = getNumberFromClass(currentClass);
-    var newNum = currentNum + (increment ? 1 : -1);
+    var newNum = newNum || currentNum + increment;
 
-    if (increment) {
-      if (currentNum >= config[attribute].max) {
-        newNum = config[attribute].min;
-      }
-    } else {
-      if (currentNum <= config[attribute].min) {
-        newNum = config[attribute].max;
-      }
+    if (increment === 1 && currentNum >= config[attribute].max) {
+      newNum = config[attribute].min;
+    }
+
+    if (increment === -1 && currentNum <= config[attribute].min) {
+      newNum = config[attribute].max;
     }
 
     var newClass = currentClass.replace(currentNum,newNum);

@@ -1,10 +1,4 @@
 
-/* Dirty
--------------------------------------------------*/
-#body-container {
-  min-width: 10vmin;
-}
-
 /* Interaction
 -------------------------------------------------*/
 
@@ -27,8 +21,11 @@
   pointer-events: none;
 }
 
+/* Form
+-------------------------------------------------*/
+
 .form {
-  width: 150px;
+  width: 175px;
   position: fixed;
   padding: 10px;
   max-height: 250px;
@@ -56,28 +53,61 @@
 .label { margin-bottom: 3px; }
 
 .button {
-  background-color: blue;
-  height: 10px;
+  position: relative;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.button.button-increment {
+  height: 20px;
   width: 20px;
-  margin-right: 1px;
-  border-radius: 0;
+  border-radius: 50%;
 }
 
-.button.up {
-  background-color: #aaa;
+.button.button-list {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
 }
 
-.button.up:hover {
-  background-color: #ddd;
+.button.up:after,
+.button.down:after {
+  position: absolute;
+  content: "";
+  height: 4px;
+  background: #888;
+  border-radius: 1px;
+  left: 0; right: 0;
+  margin-top: 8px;
+  width: 14px;
+  margin-left: auto; margin-right: auto;
 }
 
-.button.down {
-  background-color: #444;
+.button.up:before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  background: #888;
+  border-radius: 1px;
+  left: 0; right: 0;
+  margin-top: 3px;
+  width: 4px;
+  margin-left: auto; margin-right: auto;
 }
 
-.button.down:hover {
-  background-color: #222;
+.button.button-list:hover {
+  box-shadow: 0 0 0 3px white;
 }
+
+.button:hover:before,
+.button:hover:after {
+  background: white;
+}
+
+/* Constants
+-------------------------------------------------*/
+#eye { background-color: white;}
+#body-container { min-width: 10vmin; }
 
 /* Tranforms
 -------------------------------------------------*/

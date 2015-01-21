@@ -62,17 +62,17 @@
 
 <script type='text/template' class='js-form-template'>
 
-  <div id='form-<%= element %>' class='caps animate1 js-fields form'><span class='dot animate2'></span>
+  <div id='form-<%= element %>' class='caps animate1 js-fields form'>
   </div>
 </script>
 
 <script type='text/template' class='js-field-template'>
   <div class='cf field js-field' id='field-<%=attribute%>'>
     <div class='block label'><%=attribute%></div>
-    <!--
-    <a href='#' class='inline js-input down js-down button toggle'></a>
-    <a href='#' class='inline js-input up js-up button toggle'></a>
-    -->
+    <% if (attribute != 'color') { %>
+      <a href='#' class='button-increment js-input down js-down button toggle'></a><!--
+      --><a href='#' class='button-increment js-input up js-up button toggle'></a>
+    <% } %>
   </div>
 </script>
 
