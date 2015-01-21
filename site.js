@@ -105,9 +105,19 @@ $(document).ready(function() {
     for (var key in config) {
       var classes = bodyPart.className;
       var match = classes.search(config[key].regex);
+
       if (match > -1) {
         form.innerHTML += fieldTemplate({ attribute: key });
       }
+
+      var field = document.getElementById('field-' + key);
+      var count = config[key].max - config[key].min;
+
+      for (var i = 0;i <= count;i++ ) {
+        var buttonTemplate = "<a href='#' class='inline js-input js-" + i + " up button toggle'></a>";
+        field.innerHTML += buttonTemplate;
+      };
+
     };
 
     /* Form positioning */
@@ -129,12 +139,12 @@ $(document).ready(function() {
     });
 
     /* Event handlers */
+
     $('.js-input').on('click', function(ev) {
       var target = $(ev.currentTarget);
-      var bodyPartElement = document.getElementById(form.getAttribute('id').split('form-').pop());
       var attribute = target.parents('.js-field').attr('id').split('field-').pop();
       var increment = target.hasClass('js-up');
-      changeClass(bodyPartElement, attribute, increment);
+      changeClass(bodyPart, attribute, increment);
       return false;
     });
 
@@ -183,7 +193,7 @@ $(document).ready(function() {
     };
 
     /* Exception for chest - this is ugly */
-    if (bodyPart === 'chest' && attribute === 'width') {
+    if (bodyPart === 'chest' && attribute === ('width' || 'vertical gap')) {
       var bodyContainer = document.getElementById('body-container');
       bodyContainer.classList.remove(currentClass);
       bodyContainer.classList.add(newClass);
