@@ -5,6 +5,7 @@ $(document).ready(function() {
   2. Let user save? URL parameters?
   3. Better form inputs.
   4. Shift + click for multi select?
+  5. Browser support.
   */
 
   var formTemplate = _.template(document.getElementsByClassName('js-form-template')[0].innerHTML),
