@@ -180,8 +180,6 @@
       newNum = config[attribute].max;
     }
 
-    console.log(newNum);
-
     var newClass = currentClass.replace(currentNum,newNum);
 
     el.classList.remove(currentClass);
