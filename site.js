@@ -3,8 +3,9 @@ $(document).ready(function() {
   /* TODO
   1. Better form inputs.
   // List form types need serious cleanup / simplification
+       - Non-color forms should be list as well, row of blocks with active highlighted
        - Move all buttons into template
-       - non-color forms half width
+  1a. Dismiss form when user clicks off
   2. Don't need regexes, can just use string matches
   3. Design a bunch of special parts (with special[1-9] + class toggle + psuedo elements)
   4. Let user save? URL parameters?
@@ -18,12 +19,14 @@ $(document).ready(function() {
         'height': {
           'regex': /h[0-9\-]+/,
           'min':4,
-          'max':12
+          'max':12,
+          'form': 'increment'
         },
         'width': {
           'regex': /w[0-9\-]+/,
           'min':4,
-          'max':12
+          'max':12,
+          'form': 'increment'
         },
         'color': {
           'regex': /bg[0-9\-]+/,
@@ -34,72 +37,81 @@ $(document).ready(function() {
         'radius': {
           'regex': /r[0-9]+/,
           'min':1,
-          'max':4
+          'max':4,
+          'form': 'increment'
         },
         'rotate': {
           'regex': /rotate[0-9\-]+/,
           'min':-4,
-          'max':4
+          'max':4,
+          'form': 'increment'
         },
         'vertical gap': {
           'regex': /margin[b|t][0-9\-]+/,
           'min':-4,
-          'max':4
+          'max':4,
+          'form': 'increment'
         },
         'horizontal gap': {
           'regex': /margin[l|r][0-9\-]+/,
           'min':-4,
-          'max':4
+          'max':4,
+          'form': 'increment'
         }
       };
 
+  var configurable = document.getElementsByClassName('js-configurable');
+
   /* Event handlers */
-  $('.js-configurable').mouseenter(function(ev) {
-    $('i').removeClass('hover');
-    $(ev.currentTarget).addClass('hover');
-    ev.stopImmediatePropagation();
-  });
+  for (var i = 0; i < configurable.length; i++) {
 
-  $('.js-configurable').mouseleave(function(ev) {
-    $(ev.currentTarget).removeClass('hover');
-    ev.stopImmediatePropagation();
-  });
+    configurable[i].addEventListener('mouseenter', function(ev) {
+      for (var i = 0; i < configurable.length; i++) {
+        configurable[i].classList.remove('hover');
+      }
+      ev.currentTarget.classList.add('hover');
+      ev.stopImmediatePropagation();
+    });
 
-  $('.js-configurable').on('click', function(ev) {
+    configurable[i].addEventListener('mouseleave', function(ev) {
+      ev.currentTarget.classList.remove('hover');
+      ev.stopImmediatePropagation();
+    });
 
-    var prevForm = document.getElementsByClassName('js-fields')[0];
-    if (prevForm) {
-      removeForm(ev, prevForm);
-    } else {
-      makeForm(ev);
-    }
-    ev.stopImmediatePropagation();
+    configurable[i].addEventListener('click', function(ev) {
+      var prevForm = document.getElementsByClassName('js-fields')[0];
+      if (prevForm) {
+        removeForm(ev.currentTarget, prevForm);
+      } else {
+        makeForm(ev.currentTarget);
+      }
+      ev.stopImmediatePropagation();
+    });
 
-  });
+  }
 
   /* Remove form */
-  var removeForm = function(ev, prevForm) {
+  var removeForm = function(bodyPart, prevForm) {
 
-    var bodyPart = ev.currentTarget,
-        isActive = bodyPart.classList.contains('active');
+    var isActive = bodyPart.classList.contains('active');
 
     prevForm.classList.remove('in');
 
-    $('i').removeClass('active');
+    for (var i = 0; i < configurable.length; i++) {
+      configurable[i].classList.remove('active');
+    }
 
     window.setTimeout(function() {
       formContainer.innerHTML = '';
       if (!isActive) {
-        makeForm(ev);
+        makeForm(bodyPart);
       }
     }, 200);
 
   };
 
   /* Create form */
-  var makeForm = function(ev) {
-
-    var bodyPart = ev.currentTarget;
+  var makeForm = function(bodyPart) {
 
     bodyPart.classList.add('active');
 
@@ -107,6 +119,7 @@ $(document).ready(function() {
 
     var form = document.getElementsByClassName('js-fields')[0];
 
+    // Create form fields
     for (var key in config) {
       var classes = bodyPart.className;
       var match = classes.search(config[key].regex);
@@ -119,11 +132,24 @@ $(document).ready(function() {
         var count = config[key].max - config[key].min;
 
         for (var i = 0;i <= count;i++ ) {
-          var buttonTemplate = "<a href='#' data-num='" + i + "' class='bg" + i + " button button-list js-list js-input'></a>";
+          var buttonTemplate = "<a href='#' data-attribute='" + key + "' data-num='" + i + "' class='bg" + i + " button button-list js-list js-input'></a>";
           field.innerHTML += buttonTemplate;
         };
       }
 
+      /* Event handlers for our new inputs */
+      var inputs = document.getElementsByClassName('js-input');
+      for (var i = 0; i < inputs.length; i++) {
+        inputs[i].addEventListener('click', function(ev, key) {
+          var target = ev.currentTarget;
+          var increment = target.classList.contains('js-up') ? 1 : -1;
+          var newNum = target.classList.contains('js-list') ? target.dataset.num : null;
+          var attribute = target.dataset.attribute;
+
+          changeClass(bodyPart, attribute, increment, newNum);
+          ev.stopImmediatePropagation();
+        });
+      }
     };
 
     /* Form positioning */
@@ -133,35 +159,20 @@ $(document).ready(function() {
     var isTop = topSpace < window.innerHeight / 2;
     var isRight = rightSpace < window.innerWidth / 2;
 
-    $('.js-fields')
-      .css('top',isTop ? topSpace : 'auto')
-      .css('bottom',!isTop ? window.innerHeight - (topSpace + bodyPart.offsetHeight) : 'auto')
-      .css('left', !isRight ? rightSpace + 40 : rightSpace - (formWidth + bodyPart.offsetWidth) - 40);
-
     window.requestAnimationFrame(function() {
       form.classList.add('in');
       if (isTop) form.classList.add('istop');
       if (isRight) form.classList.add('isright');
     });
 
-    /* Event handlers */
+    form.style.top = isTop ? topSpace + 'px' : 'auto';
+    form.style.bottom = !isTop ? window.innerHeight - (topSpace + bodyPart.offsetHeight) + 'px' : 'auto';
+    form.style.left = !isRight ? rightSpace + 40 + 'px' : rightSpace - (formWidth + bodyPart.offsetWidth) - 40  + 'px';
 
-    $('.js-input').on('click', function(ev) {
-      var target = $(ev.currentTarget);
-      var attribute = target.parents('.js-field').attr('id').split('field-').pop();
-      var increment = target.hasClass('js-up') ? 1 : -1;
-      if (target.hasClass('js-list')) {
-        var newNum = ev.currentTarget.dataset.num;
-      }
-      changeClass(bodyPart, attribute, increment, newNum);
-      return false;
-    });
-
-    ev.stopImmediatePropagation();
   };
 
   /* Manipulate attributes */
-  var getClassFromList = function(el, classRegex) {
+  var getClassFromEl = function(el, classRegex) {
     return el.className.match(classRegex)[0];
   };
 
@@ -171,7 +182,7 @@ $(document).ready(function() {
   };
 
   var changeClass = function(el, attribute, increment, newNum) {
-    var currentClass = getClassFromList(el,config[attribute].regex);
+    var currentClass = getClassFromEl(el,config[attribute].regex);
     var currentNum = getNumberFromClass(currentClass);
     var newNum = newNum || currentNum + increment;
 
@@ -183,24 +194,26 @@ $(document).ready(function() {
       newNum = config[attribute].max;
     }
 
+    console.log(newNum);
+
     var newClass = currentClass.replace(currentNum,newNum);
 
     el.classList.remove(currentClass);
     el.classList.add(newClass);
 
     /* Match leg heights to each other */
-    var bodyPart = el.id;
+    var bodyPartName = el.id;
 
-    if (bodyPart.indexOf('leg') > -1 && attribute === 'height') {
+    if (bodyPartName.indexOf('leg') > -1 && attribute === 'height') {
       var pair = 'leg-' +
-        (bodyPart.indexOf('lower') > -1 ? 'lower-' : 'upper-') +
-        (bodyPart.indexOf('left') > -1 ? 'right' : 'left');
+        (bodyPartName.indexOf('lower') > -1 ? 'lower-' : 'upper-') +
+        (bodyPartName.indexOf('left') > -1 ? 'right' : 'left');
       document.getElementById(pair).classList.remove(currentClass);
       document.getElementById(pair).classList.add(newClass);
     };
 
     /* Exception for chest - this is ugly */
-    if (bodyPart === 'chest' && attribute === ('width' || 'vertical gap')) {
+    if (bodyPartName === 'chest' && attribute === ('width' || 'vertical gap')) {
       var bodyContainer = document.getElementById('body-container');
       bodyContainer.classList.remove(currentClass);
       bodyContainer.classList.add(newClass);

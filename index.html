@@ -6,7 +6,6 @@
   <link rel='stylesheet' href='base.css' />
   <link rel='stylesheet' href='style.css' />
   <script type='text/javascript' src='underscore-min.js'></script>
-  <script type='text/javascript' src='jquery-2.1.3.min.js'></script>
   <script type='text/javascript' src='site.js'></script>
 </head>
 <body>
@@ -70,8 +69,8 @@
   <div class='cf field js-field' id='field-<%=attribute%>'>
     <div class='block label'><%=attribute%></div>
     <% if (attribute != 'color') { %>
-      <a href='#' class='button-increment js-input down js-down button toggle'></a><!--
-      --><a href='#' class='button-increment js-input up js-up button toggle'></a>
+      <a href='#' data-attribute='<%=attribute%>' class='button-increment js-input down js-down button toggle'></a><!--
+      --><a href='#' data-attribute='<%=attribute%>' class='button-increment js-input up js-up button toggle'></a>
     <% } %>
   </div>
 </script>
