@@ -1,4 +1,3 @@
-$(document).ready(function() {
 
   /* TODO
   1. Better form inputs.
@@ -64,19 +63,6 @@ $(document).ready(function() {
 
   /* Event handlers */
   for (var i = 0; i < configurable.length; i++) {
-
-    configurable[i].addEventListener('mouseenter', function(ev) {
-      for (var i = 0; i < configurable.length; i++) {
-        configurable[i].classList.remove('hover');
-      }
-      ev.currentTarget.classList.add('hover');
-      ev.stopImmediatePropagation();
-    });
-
-    configurable[i].addEventListener('mouseleave', function(ev) {
-      ev.currentTarget.classList.remove('hover');
-      ev.stopImmediatePropagation();
-    });
 
     configurable[i].addEventListener('click', function(ev) {
       var prevForm = document.getElementsByClassName('js-fields')[0];
@@ -221,5 +207,3 @@ $(document).ready(function() {
 
     return false;
   };
-
-});

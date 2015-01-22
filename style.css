@@ -2,10 +2,8 @@
 /* Interaction
 -------------------------------------------------*/
 
-.configurable.hover {
-/*  box-shadow: 0 0 0 5px white, 0 0 0 10px rgba(0,0,0,.2);
-  z-index: 100;
-*/  cursor: pointer;
+.configurable:hover {
+  cursor: pointer;
 }
 
 .configurable.active {
