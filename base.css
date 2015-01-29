@@ -1,9 +1,10 @@
 /* CSS designed for drawing */
 
 body {
-  font: normal 10px/15px Menlo, consolas, monospace;
+  font: normal 12px/15px Menlo, consolas, monospace;
+  letter-spacing: 2px;
   box-sizing: border-box;
-  color: #888;
+  color: rgba(0,0,0,.5);
 }
 
 *, *:before, *:after { box-sizing: inherit;}
@@ -23,11 +24,18 @@ i {
           transition:all .25s;
 }
 
-.animate1 {
+.animate-opacity {
   -webkit-transition:opacity .25s;
      -moz-transition:opacity .25s;
       -ms-transition:opacity .25s;
           transition:opacity .25s;
+}
+
+.animate-all {
+  -webkit-transition:all .25s;
+     -moz-transition:all .25s;
+      -ms-transition:all .25s;
+          transition:all .25s;
 }
 
 /* this is sloppy */

@@ -24,8 +24,8 @@
 -------------------------------------------------*/
 
 .form {
-  width: 160px;
-  min-height: 200px;
+  width: 180px;
+  min-height: 220px;
   position: fixed;
   overflow: scroll;
   border-radius: 3px;
@@ -41,45 +41,38 @@
 
 .caps { text-transform: uppercase;}
 
-.field:not(:first-of-type) { margin-top: 7px;}
-.label { margin-bottom: 2px; }
+.field:not(:first-of-type) { margin-top: 10px;}
+.label {
+  margin-bottom: 2px;
+}
 
 .button {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
   position: relative;
   display: inline-block;
   vertical-align: top;
-  width: 20px;
-  height: 20px;
+  margin: 5px 5px 5px 0;
 }
 
-.button.button-increment {
-  background: rgba(0,0,0,.25);
+.button-increment {
+  background: rgba(0,0,0,.2);
 }
 
-.button-list:first-of-type {
-  border-radius: 50% 0 0 0;
+.button-list:hover {
+  box-shadow: inset 0 0 0 3px rgba(0,0,0,.2), inset 0 0 0 5px white;
 }
 
-.button-list:nth-of-type(8) {
-  border-radius: 0 50% 0 0;
+.button-list.active {
+  box-shadow: inset 0 0 0 3px rgba(0,0,0,.5), inset 0 0 0 5px white;
 }
 
-.button.active {
-  background: rgba(0,0,0,.5);
+.button-increment:hover {
+  background: rgba(0,0,0,.3);
 }
 
-.button-list:nth-of-type(9) {
-  border-radius: 0 0 0 50%;
-}
-
-.button-list:last-of-type {
-  border-radius: 0 0 50% 0;
-}
-
-.button-increment:first-of-type { border-radius: 50% 0 0 50%;}
-.button-increment:last-of-type { border-radius: 0 50% 50% 0;}
-
-.button:hover {
+.button-increment.active {
   background: rgba(0,0,0,.5);
 }
 

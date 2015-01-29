@@ -12,6 +12,12 @@ var background = document.getElementsByClassName('js-background')[0],
     buttons = document.getElementsByClassName('js-input');
     configurable = document.getElementsByClassName('js-configurable'),
     config = {
+      'color': {
+        'regex': /bg[0-9\-]+/,
+        'min':0,
+        'max':17,
+        'form': 'list'
+      },
       'height': {
         'regex': /h[0-9\-]+/,
         'min':4,
@@ -23,12 +29,6 @@ var background = document.getElementsByClassName('js-background')[0],
         'min':4,
         'max':12,
         'form': 'increment'
-      },
-      'color': {
-        'regex': /bg[0-9\-]+/,
-        'min':1,
-        'max':17,
-        'form': 'list'
       },
       'radius': {
         'regex': /r[0-9]+/,
@@ -57,9 +57,10 @@ var background = document.getElementsByClassName('js-background')[0],
   };
 
   /* Event handlers */
-  background.addEventListener('click', function(ev) {
-    removeForm(ev.currentTarget, fields);
-  });
+
+  // background.addEventListener('click', function(ev) {
+  //   removeForm(ev.currentTarget, fields);
+  // });
 
   for (var i = 0;i < configurable.length; i++) {
 
@@ -104,12 +105,12 @@ var background = document.getElementsByClassName('js-background')[0],
 
     var fields = document.createElement('DIV');
       fields.id = 'form-' + bodyPart.id;
-      fields.className = 'js-fields fields in animate1';
+      fields.className = 'js-fields fields in animate-opacity';
 
     // Create form fields
     for (var key in config) {
       var match = bodyPart.className.search(config[key].regex);
-      var count = config[key].max - config[key].min;
+      var count = (config[key].max - config[key].min) + 1;
 
       var field = document.createElement('DIV');
         field.id = 'field-' + key;
@@ -132,7 +133,7 @@ var background = document.getElementsByClassName('js-background')[0],
             button.setAttribute('href','#');
             button.dataset.attribute = key;
             button.dataset.num = config[key].min + i;
-            button.className = 'attr-' + key + i + ' button-' + config[key].form + ' button button-list js-list js-input';
+            button.className = 'attr-' + key + i + ' button-' + config[key].form + ' button js-list js-input';
 
           setActiveClass(button, bodyPart);
 
