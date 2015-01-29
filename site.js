@@ -1,13 +1,15 @@
 /* TODO
 1a. Dismiss form when user clicks off
-2. Highlight active settings
 3. Design a bunch of special parts (with special[1-9] + class toggle + psuedo elements)
+  - i removed foot, add foot back as special part
 4. Let user save? URL parameters?
 5. Browser support.
 */
 
-var form = document.getElementsByClassName('js-form')[0],
-    fields = document.getElementsByClassName('js-fields');
+var background = document.getElementsByClassName('js-background')[0],
+    form = document.getElementsByClassName('js-form')[0],
+    fields = document.getElementsByClassName('js-fields'),
+    buttons = document.getElementsByClassName('js-input');
     configurable = document.getElementsByClassName('js-configurable'),
     config = {
       'height': {
@@ -55,6 +57,10 @@ var form = document.getElementsByClassName('js-form')[0],
   };
 
   /* Event handlers */
+  background.addEventListener('click', function(ev) {
+    removeForm(ev.currentTarget, fields);
+  });
+
   for (var i = 0;i < configurable.length; i++) {
 
     configurable[i].addEventListener('click', function(ev) {
@@ -69,12 +75,9 @@ var form = document.getElementsByClassName('js-form')[0],
 
   }
 
-  var addClick = function(ev) {
-  }
-
   /* Remove form */
   var removeForm = function(bodyPart) {
-    var isActive = bodyPart.classList.contains('active');
+    var isActive = bodyPart ? bodyPart.classList.contains('active') : false;
 
     for (var i = 0; i < fields.length; i++) {
       fields[i].classList.remove('in');
@@ -87,7 +90,7 @@ var form = document.getElementsByClassName('js-form')[0],
     window.setTimeout(function() {
       form.innerHTML = '';
       form.classList.remove('isright');
-      if (!isActive) {
+      if (!isActive && bodyPart) {
         makeForm(bodyPart);
       }
     }, 200);
@@ -123,8 +126,6 @@ var form = document.getElementsByClassName('js-form')[0],
       if (match > -1) {
         fields.appendChild(field);
 
-        var currentClass = getClassFromEl(bodyPart, config[key].regex);
-
         // Create buttons
         for (var i = 0; i < count;i++ ) {
           var button = document.createElement('A');
@@ -133,9 +134,8 @@ var form = document.getElementsByClassName('js-form')[0],
             button.dataset.num = config[key].min + i;
             button.className = 'attr-' + key + i + ' button-' + config[key].form + ' button button-list js-list js-input';
 
-            if (parseInt(button.dataset.num) === getNumberFromClass(currentClass)) {
-              button.classList.add('active');
-            }
+          setActiveClass(button, bodyPart);
+
           field.appendChild(button);
         }
       }
@@ -144,14 +144,11 @@ var form = document.getElementsByClassName('js-form')[0],
     form.appendChild(fields);
 
     /* Event handlers for our new buttons */
-    var buttons = document.getElementsByClassName('js-input');
-
     for (var i = 0; i < buttons.length; i++) {
       buttons[i].addEventListener('click', function(ev) {
         var target = ev.currentTarget;
         var attribute = target.dataset.attribute;
-        var newNum = target.dataset.num;
-        changeClass(bodyPart, attribute, newNum);
+        setBodyPartClasses(bodyPart, target);
         ev.stopImmediatePropagation();
       });
     }
@@ -175,8 +172,8 @@ var form = document.getElementsByClassName('js-form')[0],
   }
 
   /* Manipulate attributes */
-  var getClassFromEl = function(el, classRegex) {
-    return el.className.match(classRegex)[0];
+  var getClassFromEl = function(bodyPart, classRegex) {
+    return bodyPart.className.match(classRegex)[0];
   };
 
   var getNumberFromClass = function(className) {
@@ -184,17 +181,38 @@ var form = document.getElementsByClassName('js-form')[0],
     return parseInt(className.substr(index));
   };
 
-  var changeClass = function(el, attribute, newNum) {
+  var setActiveClass = function(button, bodyPart) {
+    var attribute = button.dataset.attribute,
+      currentClass = getClassFromEl(bodyPart, config[attribute].regex);
 
-    var currentClass = getClassFromEl(el,config[attribute].regex);
-    var currentNum = getNumberFromClass(currentClass);
-    var newClass = currentClass.replace(currentNum,newNum);
+    // This should be optimized
+    for (var i = 0; i < buttons.length; i++) {
+      if (buttons[i].classList.contains('active') && buttons[i].dataset.attribute === attribute) {
+        buttons[i].classList.remove('active');
+      }
+    }
 
-    el.classList.remove(currentClass);
-    el.classList.add(newClass);
+    if (parseInt(button.dataset.num) === getNumberFromClass(currentClass)) {
+      button.classList.add('active');
+    }
+
+
+  };
+
+  var setBodyPartClasses = function(bodyPart, target) {
+    var attribute = target.dataset.attribute,
+      currentClass = getClassFromEl(bodyPart,config[attribute].regex),
+      currentNum = getNumberFromClass(currentClass),
+      newNum = target.dataset.num,
+      newClass = currentClass.replace(currentNum,newNum);
+
+    bodyPart.classList.remove(currentClass);
+    bodyPart.classList.add(newClass);
+
+    setActiveClass(target, bodyPart);
 
     /* Match leg heights to each other */
-    var bodyPartName = el.id;
+    var bodyPartName = bodyPart.id;
     if (bodyPartName.indexOf('leg') > -1 && attribute === 'height') {
       var pair = 'leg-' +
         (bodyPartName.indexOf('lower') > -1 ? 'lower-' : 'upper-') +
