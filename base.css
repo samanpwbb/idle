@@ -25,10 +25,10 @@ i {
 }
 
 .animate1 {
-  -webkit-transition:all .15s;
-     -moz-transition:all .15s;
-      -ms-transition:all .15s;
-          transition:all .15s;
+  -webkit-transition:opacity .25s;
+     -moz-transition:opacity .25s;
+      -ms-transition:opacity .25s;
+          transition:opacity .25s;
 }
 
 /* this is sloppy */
@@ -235,21 +235,21 @@ i {
 
 /* Colors adapted from http://clrs.cc / @mrmrs / MIT License
 -------------------------------------------------*/
-.bg0  { background-color: #DFAC81;}
-.bg1  { background-color: #001F3F; }
-.bg2  { background-color: #0074D9; }
-.bg3  { background-color: #7FDBFF; }
-.bg4  { background-color: #39CCCC; }
-.bg5  { background-color: #3D9970; }
-.bg6  { background-color: #2ECC40; }
-.bg7  { background-color: #01FF70; }
-.bg8  { background-color: #FFDC00; }
-.bg9  { background-color: #FF851B; }
-.bg10 { background-color: #FF4136; }
-.bg11 { background-color: #F012BE; }
-.bg12 { background-color: #B10DC9; }
-.bg13 { background-color: #85144B; }
-.bg14 { background-color: transparent; }
-.bg15 { background-color: #aaa; }
-.bg16 { background-color: #ddd; }
-.bg17 { background-color: #111; }
+.attr-color0, .bg0  { background-color: #DFAC81;}
+.attr-color1, .bg1  { background-color: #001F3F; }
+.attr-color2, .bg2  { background-color: #0074D9; }
+.attr-color3, .bg3  { background-color: #7FDBFF; }
+.attr-color4, .bg4  { background-color: #39CCCC; }
+.attr-color5, .bg5  { background-color: #3D9970; }
+.attr-color6, .bg6  { background-color: #2ECC40; }
+.attr-color7, .bg7  { background-color: #01FF70; }
+.attr-color8, .bg8  { background-color: #FFDC00; }
+.attr-color9, .bg9  { background-color: #FF851B; }
+.attr-color10, .bg10 { background-color: #FF4136; }
+.attr-color11, .bg11 { background-color: #F012BE; }
+.attr-color12, .bg12 { background-color: #B10DC9; }
+.attr-color13, .bg13 { background-color: #85144B; }
+.attr-color14, .bg14 { background-color: transparent; }
+.attr-color15, .bg15 { background-color: #aaa; }
+.attr-color16, .bg16 { background-color: #ddd; }
+.attr-color17, .bg17 { background-color: #111; }

@@ -5,7 +5,6 @@
   <link rel='stylesheet' href='reset.css' />
   <link rel='stylesheet' href='base.css' />
   <link rel='stylesheet' href='style.css' />
-  <script type='text/javascript' src='underscore-min.js'></script>
 </head>
 <body>
 
@@ -56,23 +55,8 @@
     </i>
   </i>
 </i>
-<div class='js-form'></div>
 
-<script type='text/template' class='js-form-template'>
-
-  <div id='form-<%= element %>' class='caps animate1 js-fields form'>
-  </div>
-</script>
-
-<script type='text/template' class='js-field-template'>
-  <div class='cf field js-field' id='field-<%=attribute%>'>
-    <div class='block label'><%=attribute%></div>
-    <% if (attribute != 'color') { %>
-      <a href='#' data-attribute='<%=attribute%>' class='button-increment js-input down js-down button toggle'></a><!--
-      --><a href='#' data-attribute='<%=attribute%>' class='button-increment js-input up js-up button toggle'></a>
-    <% } %>
-  </div>
-</script>
+<div class='js-form caps animate1 form'></div>
 
 <script type='text/javascript' src='site.js'></script>
 

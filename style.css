@@ -24,83 +24,63 @@
 -------------------------------------------------*/
 
 .form {
-  width: 175px;
+  width: 160px;
+  min-height: 200px;
   position: fixed;
-  padding: 10px;
-  max-height: 250px;
   overflow: scroll;
-  background: rgba(0,0,0,.1);
   border-radius: 3px;
   right: 20px;
+}
+
+.form .fields {
   opacity: 0;
-  transform: scale(.9);
 }
-
-.form.in,
-.form.isright.in {
-  transform: scale(1);
+.form .fields.in {
   opacity: 1;
-}
-
-.form.isright {
-  text-align: right;
 }
 
 .caps { text-transform: uppercase;}
 
-.field:not(:first-of-type) { margin-top: 5px;}
-.label { margin-bottom: 3px; }
+.field:not(:first-of-type) { margin-top: 7px;}
+.label { margin-bottom: 2px; }
 
 .button {
   position: relative;
   display: inline-block;
-  margin-right: 5px;
+  vertical-align: top;
+  width: 20px;
+  height: 20px;
 }
 
 .button.button-increment {
-  height: 20px;
-  width: 20px;
-  border-radius: 50%;
+  background: rgba(0,0,0,.25);
 }
 
-.button.button-list {
-  height: 20px;
-  width: 20px;
-  border-radius: 50%;
+.button-list:first-of-type {
+  border-radius: 50% 0 0 0;
 }
 
-.button.up:after,
-.button.down:after {
-  position: absolute;
-  content: "";
-  height: 4px;
-  background: #888;
-  border-radius: 2px;
-  left: 0; right: 0;
-  margin-top: 8px;
-  width: 14px;
-  margin-left: auto; margin-right: auto;
+.button-list:nth-of-type(8) {
+  border-radius: 0 50% 0 0;
 }
 
-.button.up:before {
-  position: absolute;
-  content: "";
-  height: 14px;
-  background: #888;
-  border-radius: 2px;
-  left: 0; right: 0;
-  margin-top: 3px;
-  width: 4px;
-  margin-left: auto; margin-right: auto;
+.button.active {
+  background: rgba(0,0,0,.5);
 }
 
-.button.button-list:hover {
-  box-shadow: 0 0 0 3px white;
+.button-list:nth-of-type(9) {
+  border-radius: 0 0 0 50%;
 }
 
-.button:hover:before,
-.button:hover:after {
-  background: white;
+.button-list:last-of-type {
+  border-radius: 0 0 50% 0;
+}
+
+.button-increment:first-of-type { border-radius: 50% 0 0 50%;}
+.button-increment:last-of-type { border-radius: 0 50% 50% 0;}
+
+.button:hover {
+  background: rgba(0,0,0,.5);
 }
 
 /* Constants
