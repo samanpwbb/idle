@@ -6,6 +6,10 @@
   cursor: pointer;
 }
 
+.configurable.hover {
+  box-shadow: 0 0 0 5px white, 0 0 0 10px rgba(0,0,0,.1);
+}
+
 .configurable.active {
   box-shadow: 0 0 0 5px white, 0 0 0 10px rgba(0,0,0,.2);
   z-index: 100;
@@ -24,11 +28,10 @@
 -------------------------------------------------*/
 
 .form {
-  width: 180px;
+  width: 135px;
   min-height: 220px;
   position: fixed;
   overflow: scroll;
-  border-radius: 3px;
   right: 20px;
 }
 
@@ -42,6 +45,7 @@
 .caps { text-transform: uppercase;}
 
 .field:not(:first-of-type) { margin-top: 10px;}
+
 .label {
   margin-bottom: 2px;
 }
@@ -49,32 +53,63 @@
 .button {
   width: 15px;
   height: 15px;
-  border-radius: 50%;
   position: relative;
   display: inline-block;
   vertical-align: top;
-  margin: 5px 5px 5px 0;
 }
 
 .button-increment {
-  background: rgba(0,0,0,.2);
-}
-
-.button-list:hover {
-  box-shadow: inset 0 0 0 3px rgba(0,0,0,.2), inset 0 0 0 5px white;
-}
-
-.button-list.active {
-  box-shadow: inset 0 0 0 3px rgba(0,0,0,.5), inset 0 0 0 5px white;
-}
-
-.button-increment:hover {
-  background: rgba(0,0,0,.3);
-}
-
-.button-increment.active {
   background: rgba(0,0,0,.5);
+  color: rgba(0,0,0,.5);
 }
+
+.button-list:first-of-type { border-top-left-radius: 4px;}
+.button-list:nth-of-type(9) { border-top-right-radius: 4px;}
+.button-list:nth-of-type(10) { border-bottom-left-radius: 4px;}
+.button-list:last-of-type { border-bottom-right-radius: 4px;}
+
+.button-list:hover:after {
+  background: currentColor;
+  box-shadow: 0 0 0 2px white;
+}
+
+.button-list:after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  background: transparent;
+  right: 5px;
+  height: 5px;
+  width: 5px;
+  border-radius: 5px;
+}
+
+.button-list.active:after {
+  background: currentColor;
+  box-shadow: 0 0 0 2px white;
+}
+
+.button-increment:hover:after {
+  background: rgba(255,255,255,.5);
+}
+
+.button-increment:after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  background: transparent;
+  right: 5px;
+  height: 5px;
+  width: 5px;
+  border-radius: 5px;
+}
+
+.button-increment.active:after {
+  background: white;
+}
+
+.button-increment:last-of-type { border-radius: 0 4px 4px 0;}
+.button-increment:first-of-type { border-radius: 4px 0 0 4px;}
 
 /* Constants
 -------------------------------------------------*/

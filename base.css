@@ -1,7 +1,7 @@
 /* CSS designed for drawing */
 
 body {
-  font: normal 12px/15px Menlo, consolas, monospace;
+  font: bold 12px/15px Menlo, consolas, monospace;
   letter-spacing: 2px;
   box-sizing: border-box;
   color: rgba(0,0,0,.5);
@@ -18,24 +18,24 @@ body { position: fixed; width: 100%; height: 100%;}
 i {
   display: block;
   position: absolute;
-  -webkit-transition:all .25s;
-     -moz-transition:all .25s;
-      -ms-transition:all .25s;
-          transition:all .25s;
+  -webkit-transition:all .2s;
+     -moz-transition:all .2s;
+      -ms-transition:all .2s;
+          transition:all .2s;
 }
 
 .animate-opacity {
-  -webkit-transition:opacity .25s;
-     -moz-transition:opacity .25s;
-      -ms-transition:opacity .25s;
-          transition:opacity .25s;
+  -webkit-transition:opacity .2s;
+     -moz-transition:opacity .2s;
+      -ms-transition:opacity .2s;
+          transition:opacity .2s;
 }
 
 .animate-all {
-  -webkit-transition:all .25s;
-     -moz-transition:all .25s;
-      -ms-transition:all .25s;
-          transition:all .25s;
+  -webkit-transition:all .2s;
+     -moz-transition:all .2s;
+      -ms-transition:all .2s;
+          transition:all .2s;
 }
 
 /* this is sloppy */
@@ -242,21 +242,21 @@ i {
 
 /* Colors adapted from http://clrs.cc / @mrmrs / MIT License
 -------------------------------------------------*/
-.attr-color0, .bg0  { background-color: #DFAC81;}
-.attr-color1, .bg1  { background-color: #001F3F; }
-.attr-color2, .bg2  { background-color: #0074D9; }
-.attr-color3, .bg3  { background-color: #7FDBFF; }
-.attr-color4, .bg4  { background-color: #39CCCC; }
-.attr-color5, .bg5  { background-color: #3D9970; }
-.attr-color6, .bg6  { background-color: #2ECC40; }
-.attr-color7, .bg7  { background-color: #01FF70; }
-.attr-color8, .bg8  { background-color: #FFDC00; }
-.attr-color9, .bg9  { background-color: #FF851B; }
-.attr-color10, .bg10 { background-color: #FF4136; }
-.attr-color11, .bg11 { background-color: #F012BE; }
-.attr-color12, .bg12 { background-color: #B10DC9; }
-.attr-color13, .bg13 { background-color: #85144B; }
-.attr-color14, .bg14 { background-color: transparent; }
-.attr-color15, .bg15 { background-color: #aaa; }
-.attr-color16, .bg16 { background-color: #ddd; }
-.attr-color17, .bg17 { background-color: #111; }
+.attr-color0, .bg0  { background-color: #DFAC81; color: #DFAC81; }
+.attr-color1, .bg1  { background-color: #0D3864; color: #0D3864;  }
+.attr-color2, .bg2  { background-color: #0074D9; color: #0074D9;  }
+.attr-color3, .bg3  { background-color: #7FDBFF; color: #7FDBFF;  }
+.attr-color4, .bg4  { background-color: #39CCCC; color: #39CCCC;  }
+.attr-color5, .bg5  { background-color: #3D9970; color: #3D9970;  }
+.attr-color6, .bg6  { background-color: #2ECC40; color: #2ECC40;  }
+.attr-color7, .bg7  { background-color: #01FF70; color: #01FF70;  }
+.attr-color8, .bg8  { background-color: #FFDC00; color: #FFDC00;  }
+.attr-color9, .bg9  { background-color: #FF851B; color: #FF851B;  }
+.attr-color10, .bg10 { background-color: #FF4136; color: #FF4136; }
+.attr-color11, .bg11 { background-color: #F012BE; color: #F012BE; }
+.attr-color12, .bg12 { background-color: #B10DC9; color: #B10DC9; }
+.attr-color13, .bg13 { background-color: #85144B; color: #85144B; }
+.attr-color14, .bg14 { background-color: #111; color: #111; }
+.attr-color15, .bg15 { background-color: #aaa; color: #aaa; }
+.attr-color16, .bg16 { background-color: #ddd; color: #ddd; }
+.attr-color17, .bg17 { background-color: transparent; color: transparent; }

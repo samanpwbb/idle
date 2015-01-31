@@ -1,9 +1,9 @@
 /* TODO
-1a. Dismiss form when user clicks off
-3. Design a bunch of special parts (with special[1-9] + class toggle + psuedo elements)
+1. Recalc position when screen changes size.
+2. Design a bunch of special parts (with special[1-9] + class toggle + psuedo elements)
   - i removed foot, add foot back as special part
-4. Let user save? URL parameters?
-5. Browser support.
+3. Let user save? URL parameters?
+4. Browser support.
 */
 
 var background = document.getElementsByClassName('js-background')[0],
@@ -36,12 +36,12 @@ var background = document.getElementsByClassName('js-background')[0],
         'max':4,
         'form': 'increment'
       },
-      'rotate': {
-        'regex': /rotate[0-9\-]+/,
-        'min':-4,
-        'max':4,
-        'form': 'increment'
-      },
+      // 'rotate': {
+      //   'regex': /rotate[0-9\-]+/,
+      //   'min':-4,
+      //   'max':4,
+      //   'form': 'increment'
+      // },
       'vertical gap': {
         'regex': /margin[b|t][0-9\-]+/,
         'min':-4,
@@ -57,28 +57,46 @@ var background = document.getElementsByClassName('js-background')[0],
   };
 
   /* Event handlers */
+  var timer = null;
 
-  // background.addEventListener('click', function(ev) {
-  //   removeForm(ev.currentTarget, fields);
-  // });
+  window.onresize = function() {
+    if (timer != null) clearTimeout(timer);
+
+    timer = setTimeout(function() {
+      var activePart = document.getElementsByClassName('js-configurable active')[0] || false;
+      handleInput(activePart, true);
+    }, 100);
+  };
+
+  background.addEventListener('click', function(ev) {
+    if (ev.target === ev.currentTarget) {
+      handleInput(ev.currentTarget);
+    }
+  });
 
   for (var i = 0;i < configurable.length; i++) {
+    configurable[i].addEventListener('mouseover', function(ev) {
+      for (var i = 0; i < configurable.length; i++) {
+        configurable[i].classList.remove('hover');
+      }
+      ev.currentTarget.classList.add('hover');
+      ev.stopPropagation();
+    });
+
+    configurable[i].addEventListener('mouseleave', function(ev) {
+      ev.currentTarget.classList.remove('hover');
+      ev.stopPropagation();
+    });
 
     configurable[i].addEventListener('click', function(ev) {
-
-      if (fields) {
-        removeForm(ev.currentTarget, fields);
-      } else {
-        makeForm(ev.currentTarget);
-      }
+      handleInput(ev.currentTarget);
       ev.stopImmediatePropagation();
     });
 
   }
 
-  /* Remove form */
-  var removeForm = function(bodyPart) {
-    var isActive = bodyPart ? bodyPart.classList.contains('active') : false;
+  var handleInput = function(target, refresh) {
+    var isActive = target ? target.classList.contains('active') : false;
 
     for (var i = 0; i < fields.length; i++) {
       fields[i].classList.remove('in');
@@ -88,17 +106,17 @@ var background = document.getElementsByClassName('js-background')[0],
       configurable[i].classList.remove('active');
     }
 
-    window.setTimeout(function() {
-      form.innerHTML = '';
+    form.innerHTML = '';
+    if (!isActive && target || refresh && target) {
       form.classList.remove('isright');
-      if (!isActive && bodyPart) {
-        makeForm(bodyPart);
-      }
-    }, 200);
+      makeForm(target);
+    } else {
+      form.style.bottom = null;
+      form.style.left = null;
+    }
 
   };
 
-  /* Create form */
   var makeForm = function(bodyPart) {
 
     bodyPart.classList.add('active');
@@ -196,7 +214,6 @@ var background = document.getElementsByClassName('js-background')[0],
     if (parseInt(button.dataset.num) === getNumberFromClass(currentClass)) {
       button.classList.add('active');
     }
-
 
   };
 
