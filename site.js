@@ -1,8 +1,7 @@
 /* TODO
-1. Recalc position when screen changes size.
-2. Design a bunch of special parts (with special[1-9] + class toggle + psuedo elements)
-  - i removed foot, add foot back as special part
-3. Let user save? URL parameters?
+1. Design a bunch of special parts (with special[1-x] + class toggle + psuedo elements)
+2. Let user save? Keep track of all data in URL? (this will be interesting / hard)
+3. More interesting form elements, direct select up/down/left/right
 4. Browser support.
 */
 
@@ -12,6 +11,49 @@ var background = document.getElementsByClassName('js-background')[0],
     buttons = document.getElementsByClassName('js-input');
     configurable = document.getElementsByClassName('js-configurable'),
     config = {
+      'special': {
+        'regex': /special[0-9\-]+/,
+        'min':0,
+        'max':2,
+        'form': 'names',
+        'names': {
+          'eyes': [
+            'none',
+            'cyclops',
+            'eyes'
+          ],
+          'head': [
+            'none',
+            'ears',
+            'antennae'
+          ],
+          'leg-lower-right': [
+            'none',
+            'foot',
+            'armor'
+          ],
+          'leg-lower-left': [
+            'none',
+            'foot',
+            'armor'
+          ],
+          'arm-upper-left': [
+            'none',
+            'armor',
+            'wings'
+          ],
+          'arm-upper-right': [
+            'none',
+            'armor',
+            'wings'
+          ],
+          'pelvis': [
+            'none',
+            'dots',
+            'triangle'
+          ]
+        }
+      },
       'color': {
         'regex': /bg[0-9\-]+/,
         'min':0,
@@ -36,12 +78,6 @@ var background = document.getElementsByClassName('js-background')[0],
         'max':4,
         'form': 'increment'
       },
-      // 'rotate': {
-      //   'regex': /rotate[0-9\-]+/,
-      //   'min':-4,
-      //   'max':4,
-      //   'form': 'increment'
-      // },
       'vertical gap': {
         'regex': /margin[b|t][0-9\-]+/,
         'min':-4,
@@ -49,7 +85,7 @@ var background = document.getElementsByClassName('js-background')[0],
         'form': 'increment'
       },
       'horizontal gap': {
-        'regex': /margin[l|r][0-9\-]+/,
+        'regex': /marginx[0-9\-]+/,
         'min':-4,
         'max':4,
         'form': 'increment'
@@ -58,7 +94,6 @@ var background = document.getElementsByClassName('js-background')[0],
 
   /* Event handlers */
   var timer = null;
-
   window.onresize = function() {
     if (timer != null) clearTimeout(timer);
 
@@ -97,18 +132,15 @@ var background = document.getElementsByClassName('js-background')[0],
 
   var handleInput = function(target, refresh) {
     var isActive = target ? target.classList.contains('active') : false;
-
-    for (var i = 0; i < fields.length; i++) {
-      fields[i].classList.remove('in');
-    }
+    var isBodyPart = target.classList.contains('js-configurable');
 
     for (var i = 0; i < configurable.length; i++) {
       configurable[i].classList.remove('active');
     }
 
     form.innerHTML = '';
-    if (!isActive && target || refresh && target) {
-      form.classList.remove('isright');
+
+    if (!isActive && isBodyPart || refresh && isBodyPart) {
       makeForm(target);
     } else {
       form.style.bottom = null;
@@ -118,7 +150,6 @@ var background = document.getElementsByClassName('js-background')[0],
   };
 
   var makeForm = function(bodyPart) {
-
     bodyPart.classList.add('active');
 
     var fields = document.createElement('DIV');
@@ -137,8 +168,11 @@ var background = document.getElementsByClassName('js-background')[0],
       var label = document.createElement('DIV');
         label.className = 'block label';
 
-      var labelText = document.createTextNode(key);
+      // Only labels for increments
+      if (config[key].form === 'increment') {
+        var labelText = document.createTextNode(key);
         label.appendChild(labelText);
+      }
 
       field.appendChild(label);
 
@@ -152,7 +186,11 @@ var background = document.getElementsByClassName('js-background')[0],
             button.dataset.attribute = key;
             button.dataset.num = config[key].min + i;
             button.className = 'attr-' + key + i + ' button-' + config[key].form + ' button js-list js-input';
-
+            if (config[key].form === 'names') {
+              var nameList = config[key].names[bodyPart.id];
+              var buttonName = document.createTextNode(nameList[i]);
+              button.appendChild(buttonName);
+            }
           setActiveClass(button, bodyPart);
 
           field.appendChild(button);
@@ -167,7 +205,7 @@ var background = document.getElementsByClassName('js-background')[0],
       buttons[i].addEventListener('click', function(ev) {
         var target = ev.currentTarget;
         var attribute = target.dataset.attribute;
-        setBodyPartClasses(bodyPart, target);
+        setBodyPartClass(bodyPart, target);
         ev.stopImmediatePropagation();
       });
     }
@@ -180,10 +218,6 @@ var background = document.getElementsByClassName('js-background')[0],
     var formWidth = Math.floor(form.offsetWidth);
     var isTop = topSpace < window.innerHeight / 2;
     var isRight = rightSpace < window.innerWidth / 2;
-
-    window.requestAnimationFrame(function() {
-      if (isRight) form.classList.add('isright');
-    });
 
     form.style.bottom = !isTop ? window.innerHeight - (topSpace + partHeight) - 40 + 'px' : window.innerHeight - (formHeight + topSpace) + 40 + 'px';
     form.style.left = !isRight ? rightSpace + 40 + 'px' : rightSpace - (formWidth + partHeight) - 20  + 'px';
@@ -204,7 +238,6 @@ var background = document.getElementsByClassName('js-background')[0],
     var attribute = button.dataset.attribute,
       currentClass = getClassFromEl(bodyPart, config[attribute].regex);
 
-    // This should be optimized
     for (var i = 0; i < buttons.length; i++) {
       if (buttons[i].classList.contains('active') && buttons[i].dataset.attribute === attribute) {
         buttons[i].classList.remove('active');
@@ -217,7 +250,7 @@ var background = document.getElementsByClassName('js-background')[0],
 
   };
 
-  var setBodyPartClasses = function(bodyPart, target) {
+  var setBodyPartClass = function(bodyPart, target) {
     var attribute = target.dataset.attribute,
       currentClass = getClassFromEl(bodyPart,config[attribute].regex),
       currentNum = getNumberFromClass(currentClass),
@@ -231,8 +264,16 @@ var background = document.getElementsByClassName('js-background')[0],
 
     /* Match leg heights to each other */
     var bodyPartName = bodyPart.id;
-    if (bodyPartName.indexOf('leg') > -1 && attribute === 'height') {
+    if (bodyPartName.indexOf('leg') > -1) {
       var pair = 'leg-' +
+        (bodyPartName.indexOf('lower') > -1 ? 'lower-' : 'upper-') +
+        (bodyPartName.indexOf('left') > -1 ? 'right' : 'left');
+      document.getElementById(pair).classList.remove(currentClass);
+      document.getElementById(pair).classList.add(newClass);
+    };
+
+    if (bodyPartName.indexOf('arm') > -1) {
+      var pair = 'arm-' +
         (bodyPartName.indexOf('lower') > -1 ? 'lower-' : 'upper-') +
         (bodyPartName.indexOf('left') > -1 ? 'right' : 'left');
       document.getElementById(pair).classList.remove(currentClass);
@@ -248,3 +289,34 @@ var background = document.getElementsByClassName('js-background')[0],
 
     return false;
   };
+
+  /* Data model */
+  /* Need to do this in order to enable saving */
+  var storedBody = {};
+
+  for (var i = 0; i < configurable.length; i++) {
+
+    var bodyPart = configurable[i];
+    var partName = bodyPart.id;
+
+    /* Grab each body part, add as keys */
+    storedBody[partName] = [];
+
+    /* Grab all modifiable classnames and add them to corresponding keys */
+    for (var key in config) {
+      var match = configurable[i].className.search(config[key].regex);
+      if (match > -1) {
+        var part = getClassFromEl(bodyPart, config[key].regex);
+        storedBody[configurable[i].id].push(part);
+      }
+
+    }
+    /*
+    Now we should have a data object that can be passed into setBodyPartClass
+    We will need to:
+      1) Update this object whenever anything is changed
+      2) Load from storage on initial render
+    */
+  }
+
+
