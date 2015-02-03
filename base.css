@@ -269,21 +269,21 @@ a { color: rgba(0,0,0,.5); }
 
 /* Colors
 -------------------------------------------------*/
-.attr-color0, .background0  { background-color: #DFAC81; color: #DFAC81; }
-.attr-color1, .background1  { background-color: #0D3864; color: #0D3864;  }
-.attr-color2, .background2  { background-color: #0074D9; color: #0074D9;  }
-.attr-color3, .background3  { background-color: #7FDBFF; color: #7FDBFF;  }
-.attr-color4, .background4  { background-color: #39CCCC; color: #39CCCC;  }
-.attr-color5, .background5  { background-color: #3D9970; color: #3D9970;  }
-.attr-color6, .background6  { background-color: #2ECC40; color: #2ECC40;  }
-.attr-color7, .background7  { background-color: #33EA51; color: #33EA51;  }
-.attr-color8, .background8  { background-color: #FFDC00; color: #FFDC00;  }
-.attr-color9, .background9  { background-color: #FF851B; color: #FF851B;  }
-.attr-color10, .background10 { background-color: #FF4136; color: #FF4136; }
-.attr-color11, .background11 { background-color: #F012BE; color: #F012BE; }
-.attr-color12, .background12 { background-color: #B10DC9; color: #B10DC9; }
-.attr-color13, .background13 { background-color: #85144B; color: #85144B; }
-.attr-color14, .background14 { background-color: #111; color: #111; }
-.attr-color15, .background15 { background-color: #aaa; color: #aaa; }
-.attr-color16, .background16 { background-color: #ddd; color: #ddd; }
-.attr-color17, .background17 { background-color: transparent; color: transparent; }
+.attr-background0, .background0   { background-color: #DFAC81; color: #DFAC81; }
+.attr-background1, .background1   { background-color: #0D3864; color: #0D3864;  }
+.attr-background2, .background2   { background-color: #0074D9; color: #0074D9;  }
+.attr-background3, .background3   { background-color: #7FDBFF; color: #7FDBFF;  }
+.attr-background4, .background4   { background-color: #39CCCC; color: #39CCCC;  }
+.attr-background5, .background5   { background-color: #3D9970; color: #3D9970;  }
+.attr-background6, .background6   { background-color: #2ECC40; color: #2ECC40;  }
+.attr-background7, .background7   { background-color: #33EA51; color: #33EA51;  }
+.attr-background8, .background8   { background-color: #FFDC00; color: #FFDC00;  }
+.attr-background9, .background9   { background-color: #FF851B; color: #FF851B;  }
+.attr-background10, .background10 { background-color: #FF4136; color: #FF4136; }
+.attr-background11, .background11 { background-color: #F012BE; color: #F012BE; }
+.attr-background12, .background12 { background-color: #B10DC9; color: #B10DC9; }
+.attr-background13, .background13 { background-color: #85144B; color: #85144B; }
+.attr-background14, .background14 { background-color: #111; color: #111; }
+.attr-background15, .background15 { background-color: #aaa; color: #aaa; }
+.attr-background16, .background16 { background-color: #ddd; color: #ddd; }
+.attr-background17, .background17 { background-color: transparent; color: transparent; }
