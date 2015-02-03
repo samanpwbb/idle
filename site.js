@@ -12,7 +12,6 @@ var background = document.getElementsByClassName('js-background')[0],
     configurable = document.getElementsByClassName('js-configurable'),
     config = {
       'special': {
-        'regex': /special[0-9\-]+/,
         'min':0,
         'max':2,
         'form': 'names',
@@ -30,62 +29,51 @@ var background = document.getElementsByClassName('js-background')[0],
           'leg-lower-right': [
             'none',
             'foot',
-            'armor'
+            'details'
           ],
           'leg-lower-left': [
             'none',
             'foot',
-            'armor'
+            'details'
           ],
           'arm-upper-left': [
             'none',
-            'armor',
+            'details',
             'wings'
           ],
           'arm-upper-right': [
             'none',
-            'armor',
+            'details',
             'wings'
-          ],
-          'pelvis': [
-            'none',
-            'dots',
-            'triangle'
           ]
         }
       },
-      'color': {
-        'regex': /bg[0-9\-]+/,
+      'background': {
         'min':0,
         'max':17,
         'form': 'list'
       },
       'height': {
-        'regex': /h[0-9\-]+/,
         'min':4,
         'max':12,
         'form': 'increment'
       },
       'width': {
-        'regex': /w[0-9\-]+/,
         'min':4,
         'max':12,
         'form': 'increment'
       },
       'radius': {
-        'regex': /r[0-9]+/,
         'min':1,
         'max':4,
         'form': 'increment'
       },
       'vertical gap': {
-        'regex': /margin[b|t][0-9\-]+/,
         'min':-4,
         'max':4,
         'form': 'increment'
       },
       'horizontal gap': {
-        'regex': /marginx[0-9\-]+/,
         'min':-4,
         'max':4,
         'form': 'increment'
@@ -205,8 +193,11 @@ var background = document.getElementsByClassName('js-background')[0],
       buttons[i].addEventListener('click', function(ev) {
         var target = ev.currentTarget;
         var attribute = target.dataset.attribute;
-        setBodyPartClass(bodyPart, target);
+        var newClass = currentClass.replace(currentNum,target.dataset.num);
+        // this is broken
+        setBodyPartClass(bodyPart, attribute, newClass);
         ev.stopImmediatePropagation();
+
       });
     }
 
@@ -225,8 +216,13 @@ var background = document.getElementsByClassName('js-background')[0],
   }
 
   /* Manipulate attributes */
-  var getClassFromEl = function(bodyPart, classRegex) {
-    return bodyPart.className.match(classRegex)[0];
+  var getClassFromEl = function(el, attributeName) {
+    var regex = new RegExp(attributeName + '[0-9\-]');
+    for (var i = 0; i < el.classList.length; i++) {
+      if (el.classList[i].match(regex)) {
+        return el.classList[i];
+      }
+    }
   };
 
   var getNumberFromClass = function(className) {
@@ -250,20 +246,20 @@ var background = document.getElementsByClassName('js-background')[0],
 
   };
 
-  var setBodyPartClass = function(bodyPart, target) {
-    var attribute = target.dataset.attribute,
-      currentClass = getClassFromEl(bodyPart,config[attribute].regex),
+  /* this needs to be reworked to only take bodyPart and newClass arguments,
+  target should adapt based on changes to data model */
+  var setBodyPartClass = function(el, attribute, newClass) {
+    var currentClass = getClassFromEl(el,attribute),
       currentNum = getNumberFromClass(currentClass),
-      newNum = target.dataset.num,
-      newClass = currentClass.replace(currentNum,newNum);
 
-    bodyPart.classList.remove(currentClass);
-    bodyPart.classList.add(newClass);
+    el.classList.remove(currentClass);
+    el.classList.add(newClass);
 
-    setActiveClass(target, bodyPart);
+    /* this needs to be changed to be based on data model */
+    setActiveClass(target, el);
 
     /* Match leg heights to each other */
-    var bodyPartName = bodyPart.id;
+    var bodyPartName = el.id;
     if (bodyPartName.indexOf('leg') > -1) {
       var pair = 'leg-' +
         (bodyPartName.indexOf('lower') > -1 ? 'lower-' : 'upper-') +
@@ -291,32 +287,40 @@ var background = document.getElementsByClassName('js-background')[0],
   };
 
   /* Data model */
-  /* Need to do this in order to enable saving */
   var storedBody = {};
+  var getDataFromClasses = function() {
 
-  for (var i = 0; i < configurable.length; i++) {
+    for (var i = 0; i < configurable.length; i++) {
 
-    var bodyPart = configurable[i];
-    var partName = bodyPart.id;
+      var el = configurable[i];
 
-    /* Grab each body part, add as keys */
-    storedBody[partName] = [];
+      /* Grab each body part, add as keys */
+      storedBody[el.id] = [];
 
-    /* Grab all modifiable classnames and add them to corresponding keys */
-    for (var key in config) {
-      var match = configurable[i].className.search(config[key].regex);
-      if (match > -1) {
-        var part = getClassFromEl(bodyPart, config[key].regex);
-        storedBody[configurable[i].id].push(part);
+      /* Grab all modifiable classnames and add them to corresponding keys */
+      for (var key in config) {
+        var match = configurable[i].className.search(key);
+        if (match > -1) {
+          var part = getClassFromEl(el, key);
+          storedBody[configurable[i].id].push(part);
+        }
       }
-
+      /*
+      Now we should have a data object that can be passed into setBodyPartClass
+      We will need to:
+        1. Click handlers update this object
+        2. After click, updated object is passed to render function
+      */
     }
-    /*
-    Now we should have a data object that can be passed into setBodyPartClass
-    We will need to:
-      1) Update this object whenever anything is changed
-      2) Load from storage on initial render
-    */
-  }
+  };
 
+  getDataFromClasses();
 
+  var addClassesfromData = function() {
+    for (key in storedBody) {
+      for (i in storedBody[key]) {
+        var bodyPart = document.getElementById(key);
+        setBodyPartClass(bodyPart, storedBody[key][i]);
+      }
+    }
+  };
