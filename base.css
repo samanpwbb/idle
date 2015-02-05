@@ -7,13 +7,25 @@ body {
   color: rgba(0,0,0,.5);
 }
 
-*, *:before, *:after { box-sizing: inherit;}
+*, *:before, *:after {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
+  box-sizing: inherit;
+}
 
 body { position: fixed; width: 100%; height: 100%;}
 
-.cf:before,
-.cf:after { display: table; }
-.cf:after { clear: both; }
+.cf { display:block; }
+.cf:after {
+  content:'';
+  display:block;
+  height:0;
+  clear:both;
+  visibility:hidden;
+  }
+
 
 i {
   display: block;
@@ -24,24 +36,21 @@ i {
           transition:all .2s;
 }
 
-.animate-opacity {
-  -webkit-transition:opacity .2s;
-     -moz-transition:opacity .2s;
-      -ms-transition:opacity .2s;
-          transition:opacity .2s;
-}
-
-.animate-all {
+.animate-all,
+.animate-all:before,
+.animate-all:after {
   -webkit-transition:all .2s;
      -moz-transition:all .2s;
       -ms-transition:all .2s;
           transition:all .2s;
 }
 
-/* this is sloppy */
 .relative { position: relative;}
 .inline { display: inline-block;}
 .fl { float: left;}
+
+a { color: rgba(0,0,0,.5); }
+
 /* Positioning
 -------------------------------------------------*/
 
@@ -139,48 +148,66 @@ i {
 /* Sizing
 -------------------------------------------------*/
 
-.h1  { height: 1vmin;}
-.h3  { height: 3vmin;}
-.h4  { height: 4vmin;}
-.h5  { height: 5vmin;}
-.h6  { height: 6vmin;}
-.h7  { height: 7vmin;}
-.h8  { height: 8vmin;}
-.h9  { height: 9vmin;}
-.h10 { height: 10vmin;}
-.h11 { height: 11vmin;}
-.h12 { height: 12vmin;}
-.h13 { height: 13vmin;}
-.h14 { height: 14vmin;}
-.h15 { height: 15vmin;}
-.h18 { height: 18vmin;}
-.h19 { height: 19vmin;}
-.h20 { height: 20vmin;}
-.h25 { height: 25vmin;}
-.h30 { height: 30vmin;}
-.h35 { height: 35vmin;}
+.height1  { height: 1vmin;}
+.height3  { height: 3vmin;}
+.height4  { height: 4vmin;}
+.height5  { height: 5vmin;}
+.height6  { height: 6vmin;}
+.height7  { height: 7vmin;}
+.height8  { height: 8vmin;}
+.height9  { height: 9vmin;}
+.height10 { height: 10vmin;}
+.height11 { height: 11vmin;}
+.height12 { height: 12vmin;}
+.height13 { height: 13vmin;}
+.height14 { height: 14vmin;}
+.height15 { height: 15vmin;}
+.height18 { height: 18vmin;}
+.height19 { height: 19vmin;}
+.height20 { height: 20vmin;}
+.height25 { height: 25vmin;}
+.height30 { height: 30vmin;}
+.height35 { height: 35vmin;}
 
-.w1  { width: 1vmin;}
-.w3  { width: 3vmin;}
-.w4  { width: 4vmin;}
-.w5  { width: 5vmin;}
-.w6  { width: 6vmin;}
-.w7  { width: 7vmin;}
-.w8  { width: 8vmin;}
-.w9  { width: 9vmin;}
-.w10 { width: 10vmin;}
-.w11 { width: 11vmin;}
-.w12 { width: 12vmin;}
-.w13 { width: 13vmin;}
-.w14 { width: 14vmin;}
-.w15 { width: 15vmin;}
-.w20 { width: 20vmin;}
-.w25 { width: 25vmin;}
-.w30 { width: 30vmin;}
-.w35 { width: 35vmin;}
+.width1  { width: 1vmin;}
+.width3  { width: 3vmin;}
+.width4  { width: 4vmin;}
+.width5  { width: 5vmin;}
+.width6  { width: 6vmin;}
+.width7  { width: 7vmin;}
+.width8  { width: 8vmin;}
+.width9  { width: 9vmin;}
+.width10 { width: 10vmin;}
+.width11 { width: 11vmin;}
+.width12 { width: 12vmin;}
+.width13 { width: 13vmin;}
+.width14 { width: 14vmin;}
+.width15 { width: 15vmin;}
+.width20 { width: 20vmin;}
+.width25 { width: 25vmin;}
+.width30 { width: 30vmin;}
+.width35 { width: 35vmin;}
 
 /* Margins
 -------------------------------------------------*/
+
+[id*='-left'] .marginx-1 { margin-left: -1vmin;}
+[id*='-left'] .marginx-2 { margin-left: -2vmin;}
+[id*='-left'] .marginx-3 { margin-left: -3vmin;}
+[id*='-left'] .marginx-4 { margin-left: -4vmin;}
+[id*='-left'] .marginx1  { margin-left: 1vmin;}
+[id*='-left'] .marginx2  { margin-left: 2vmin;}
+[id*='-left'] .marginx3  { margin-left: 3vmin;}
+[id*='-left'] .marginx4  { margin-left: 4vmin;}
+
+[id*='-right'] .marginx-1 { margin-right: -1vmin;}
+[id*='-right'] .marginx-2 { margin-right: -2vmin;}
+[id*='-right'] .marginx-3 { margin-right: -3vmin;}
+[id*='-right'] .marginx-4 { margin-right: -4vmin;}
+[id*='-right'] .marginx1 { margin-right: 1vmin;}
+[id*='-right'] .marginx2 { margin-right: 2vmin;}
+[id*='-right'] .marginx3 { margin-right: 3vmin;}
+[id*='-right'] .marginx4 { margin-right: 4vmin;}
 
 .marginl1 { margin-left: 1vmin;}
 .marginl2 { margin-left: 2vmin;}
@@ -225,38 +252,38 @@ i {
 /* Border radius
 -------------------------------------------------*/
 
-.r1 { border-radius: 0vmin;}
-.r2 { border-radius: 2vmin;}
-.r3 { border-radius: 4vmin;}
-.r4 { border-radius: 100%;}
+.radius1 { border-radius: 0vmin;}
+.radius2 { border-radius: 2vmin;}
+.radius3 { border-radius: 4vmin;}
+.radius4 { border-radius: 100%;}
 
-.rt1 { border-top-left-radius: 1vmin; border-top-right-radius: 1vmin; }
-.rt2 { border-top-left-radius: 2vmin; border-top-right-radius: 2vmin; }
-.rt3 { border-top-left-radius: 3vmin; border-top-right-radius: 3vmin; }
-.rt4 { border-top-left-radius: 4vmin; border-top-right-radius: 4vmin; }
+.radiust1 { border-top-left-radius: 1vmin; border-top-right-radius: 1vmin; }
+.radiust2 { border-top-left-radius: 2vmin; border-top-right-radius: 2vmin; }
+.radiust3 { border-top-left-radius: 3vmin; border-top-right-radius: 3vmin; }
+.radiust4 { border-top-left-radius: 4vmin; border-top-right-radius: 4vmin; }
 
-.rb1 { border-bottom-left-radius: 1vmin; border-bottom-right-radius: 1vmin; }
-.rb2 { border-bottom-left-radius: 2vmin; border-bottom-right-radius: 2vmin; }
-.rb3 { border-bottom-left-radius: 3vmin; border-bottom-right-radius: 3vmin; }
-.rb4 { border-bottom-left-radius: 4vmin; border-bottom-right-radius: 4vmin; }
+.radiusb1 { border-bottom-left-radius: 1vmin; border-bottom-right-radius: 1vmin; }
+.radiusb2 { border-bottom-left-radius: 2vmin; border-bottom-right-radius: 2vmin; }
+.radiusb3 { border-bottom-left-radius: 3vmin; border-bottom-right-radius: 3vmin; }
+.radiusb4 { border-bottom-left-radius: 4vmin; border-bottom-right-radius: 4vmin; }
 
-/* Colors adapted from http://clrs.cc / @mrmrs / MIT License
+/* Colors
 -------------------------------------------------*/
-.attr-color0, .bg0  { background-color: #DFAC81; color: #DFAC81; }
-.attr-color1, .bg1  { background-color: #0D3864; color: #0D3864;  }
-.attr-color2, .bg2  { background-color: #0074D9; color: #0074D9;  }
-.attr-color3, .bg3  { background-color: #7FDBFF; color: #7FDBFF;  }
-.attr-color4, .bg4  { background-color: #39CCCC; color: #39CCCC;  }
-.attr-color5, .bg5  { background-color: #3D9970; color: #3D9970;  }
-.attr-color6, .bg6  { background-color: #2ECC40; color: #2ECC40;  }
-.attr-color7, .bg7  { background-color: #01FF70; color: #01FF70;  }
-.attr-color8, .bg8  { background-color: #FFDC00; color: #FFDC00;  }
-.attr-color9, .bg9  { background-color: #FF851B; color: #FF851B;  }
-.attr-color10, .bg10 { background-color: #FF4136; color: #FF4136; }
-.attr-color11, .bg11 { background-color: #F012BE; color: #F012BE; }
-.attr-color12, .bg12 { background-color: #B10DC9; color: #B10DC9; }
-.attr-color13, .bg13 { background-color: #85144B; color: #85144B; }
-.attr-color14, .bg14 { background-color: #111; color: #111; }
-.attr-color15, .bg15 { background-color: #aaa; color: #aaa; }
-.attr-color16, .bg16 { background-color: #ddd; color: #ddd; }
-.attr-color17, .bg17 { background-color: transparent; color: transparent; }
+.attr-background0, .background0   { background-color: #DFAC81; color: #DFAC81; }
+.attr-background1, .background1   { background-color: #0D3864; color: #0D3864;  }
+.attr-background2, .background2   { background-color: #0074D9; color: #0074D9;  }
+.attr-background3, .background3   { background-color: #7FDBFF; color: #7FDBFF;  }
+.attr-background4, .background4   { background-color: #39CCCC; color: #39CCCC;  }
+.attr-background5, .background5   { background-color: #3D9970; color: #3D9970;  }
+.attr-background6, .background6   { background-color: #2ECC40; color: #2ECC40;  }
+.attr-background7, .background7   { background-color: #33EA51; color: #33EA51;  }
+.attr-background8, .background8   { background-color: #FFDC00; color: #FFDC00;  }
+.attr-background9, .background9   { background-color: #FF851B; color: #FF851B;  }
+.attr-background10, .background10 { background-color: #FF4136; color: #FF4136; }
+.attr-background11, .background11 { background-color: #F012BE; color: #F012BE; }
+.attr-background12, .background12 { background-color: #B10DC9; color: #B10DC9; }
+.attr-background13, .background13 { background-color: #85144B; color: #85144B; }
+.attr-background14, .background14 { background-color: #111; color: #111; }
+.attr-background15, .background15 { background-color: #aaa; color: #aaa; }
+.attr-background16, .background16 { background-color: #ddd; color: #ddd; }
+.attr-background17, .background17 { background-color: transparent; color: transparent; }
