@@ -169,8 +169,7 @@ function makeForm(bodyPart) {
 
       // Create buttons
       for (var i = 0; i < count;i++ ) {
-        var button = document.createElement('A');
-          button.setAttribute('href','#');
+        var button = document.createElement('BUTTON');
           button.dataset.attribute = key;
           button.dataset.number = config[key].min + i;
           button.className = 'attr-' + key + i + ' button-' + config[key].form + ' button js-list js-input';
@@ -242,6 +241,8 @@ function updateData(el, attribute, number) {
   /* Update form based on data */
   setActiveButtons(activePart, storedBody);
 
+  getQueryString(storedBody);
+
 };
 
 
@@ -296,6 +297,19 @@ function setBodyPart(activePart, data) {
 
   }
   return false;
+
+};
+
+function getQueryString(data) {
+
+  var stringified = '';
+  for (key in data) {
+    stringified += queryString.stringify({
+      part: key,
+      nested: JSON.stringify(data[key])
+    });
+  }
+  window.location.hash = stringified;
 
 };
 

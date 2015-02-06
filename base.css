@@ -49,7 +49,29 @@ i {
 .inline { display: inline-block;}
 .fl { float: left;}
 
-a { color: rgba(0,0,0,.5); }
+button {
+  font: bold 12px/15px Menlo, consolas, monospace;
+  text-transform: uppercase;
+  color: rgba(0,0,0,.5);
+  background: none repeat scroll 0 0 transparent;
+  border: medium none;
+  border-spacing: 0;
+  list-style: none outside none;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  text-decoration: none;
+  text-indent: 0;
+}
+
+button:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+button:hover {
+  cursor: pointer;
+}
 
 /* Positioning
 -------------------------------------------------*/
