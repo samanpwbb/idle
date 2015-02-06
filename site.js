@@ -1,6 +1,7 @@
 /* TODO
 1. Let user save? Keep track of all data in URL? (this will be interesting / hard)
 2. Add share button / UI
+3. Don't use for (key in object), use Object.keys instead
 3. Save to url shortener service
 4. Highlight limb matches
 5. More interesting form elements, direct select up/down/left/right
@@ -241,7 +242,7 @@ function updateData(el, attribute, number) {
   /* Update form based on data */
   setActiveButtons(activePart, storedBody);
 
-  getQueryString(storedBody);
+  makeQueryString(storedBody);
 
 };
 
@@ -300,7 +301,7 @@ function setBodyPart(activePart, data) {
 
 };
 
-function getQueryString(data) {
+function makeQueryString(data) {
 
   var stringified = '';
   for (key in data) {
@@ -308,13 +309,30 @@ function getQueryString(data) {
       part: key,
       nested: JSON.stringify(data[key])
     });
+    stringified += '&';
   }
   window.location.hash = stringified;
 
+  getDataFromQueryString(stringified);
+};
+
+function getDataFromQueryString(querystring) {
+  var data = queryString.parse(querystring);
+  var attributes = []
+  for (var i = 0; i < data.nested.length; i++) {
+    attributes.push(JSON.parse(data.nested[i]));
+  }
+
+  var newBody = {};
+  for (var i = 0; i < attributes.length; i++) {
+    newBody[data.part[i]] = attributes[i];
+  }
+
+  return newBody;
 };
 
 /* Initial data model */
-function getDatafromElements(els) {
+function getDataFromElements(els) {
 
   for (var i = 0; i < els.length; i++) {
     var el = els[i];
@@ -337,16 +355,15 @@ function getDatafromElements(els) {
 
 function initialize() {
 
-  // TODO actually save data to params
-  var params = false;
+  var params = window.location.hash;
 
   if (params) {
-    storedBody = getDatafromParams();
+    storedBody = getDataFromQueryString(params);
     for (part in storedBody) {
       setBodyPart(part, storedBody);
     }
   } else {
-    storedBody = getDatafromElements(configurable);
+    storedBody = getDataFromElements(configurable);
   }
 
 };
