@@ -1,9 +1,9 @@
 /* TODO
 1. Let user save? Keep track of all data in URL? (this will be interesting / hard)
-2. Highlight limb matches
-3. More interesting form elements, direct select up/down/left/right
-4. Scrap class-based styling altogether
-5. Browser support.
+2. Add share button / UI
+3. Save to url shortener service
+4. Highlight limb matches
+5. More interesting form elements, direct select up/down/left/right
 */
 
 var background = document.getElementsByClassName('js-background')[0],
