@@ -1,10 +1,12 @@
 /* TODO
-1. Let user save? Keep track of all data in URL? (this will be interesting / hard)
-2. Add share button / UI
-3. Don't use for (key in object), use Object.keys instead
-3. Save to url shortener service
-4. Highlight limb matches
-5. More interesting form elements, direct select up/down/left/right
+1. Fix state bugginess (changing width resets color???)
+2. Intro animation
+3. Make hands 'special' and add alternatives
+4. More interesting form elements, direct select up/down/left/right
+5. Add share button / UI
+6. Don't use for (key in object), use Object.keys instead
+7. Save to url shortener service
+8. Highlight limb matches
 */
 
 var background = document.getElementsByClassName('js-background')[0],

@@ -29,10 +29,10 @@ i {
   position: absolute;
   /* fix because firefox tries to transition on animation properties */
   transition: box-shadow .2s,
-              radius .2s,
+              border-radius .2s,
               height .2s,
               width .2s,
-              background .2s,
+              background-color .2s,
               margin .2s;
 }
 

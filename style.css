@@ -314,6 +314,14 @@
   animation: ease-in-out wing-wiggle-left2 1.5s .25s infinite alternate backwards;
 }
 
+/* Hands
+-------------------------------------------------*/
+
+#hand-right,
+#hand-left {
+  background-color: inherit;
+}
+
 /* Animation
 -------------------------------------------------*/
 #chest {
