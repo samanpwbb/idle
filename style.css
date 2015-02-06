@@ -139,7 +139,7 @@
 /* 1 */
 #head.special1:before {
   content: '';
-  background: currentColor;
+  background: inherit;
   position: absolute;
   top: 50%;
   left: -2vmin;
@@ -152,7 +152,7 @@
 
 #head.special2:before {
   content: '';
-  background: currentColor;
+  background: inherit;
   position: absolute;
   width: 2vmin;
   top: -4vmin;
@@ -208,7 +208,7 @@
 #leg-lower-right.special2:after,
 #leg-lower-left.special2:after {
   content: '';
-  background: currentColor;
+  background: inherit;
   position: absolute;
   bottom: 0;
   left: 0;
@@ -227,7 +227,7 @@
 #leg-lower-left.special2:before,
 #leg-lower-right.special2:before {
   content: '';
-  background: currentColor;
+  background: inherit;
   position: absolute;
   top: 0;
   left: 0;
@@ -252,7 +252,7 @@
 #arm-upper-right.special1:after,
 #arm-upper-left.special1:after {
   content: '';
-  background: currentColor;
+  background: inherit;
   position: absolute;
   bottom: 0;
   left: 0;
@@ -270,7 +270,7 @@
 #arm-upper-right.special2:after,
 #arm-upper-left.special2:after {
   content: '';
-  background: currentColor;
+  background: inherit;
   position: absolute;
   border-radius: 2vmin;
   height: 4vmin;
@@ -293,7 +293,7 @@
 #arm-upper-right.special2:before,
 #arm-upper-left.special2:before {
   content: '';
-  background: currentColor;
+  background: inherit;
   position: absolute;
   border-radius: 2vmin;
   height: 3vmin;

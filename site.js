@@ -1,10 +1,9 @@
 /* TODO
 1. Let user save? Keep track of all data in URL? (this will be interesting / hard)
 2. Highlight limb matches
-3. just save numbers for values, not classnames
-4. More interesting form elements, direct select up/down/left/right
-5. Scrap class-based styling altogether
-6. Browser support.
+3. More interesting form elements, direct select up/down/left/right
+4. Scrap class-based styling altogether
+5. Browser support.
 */
 
 var background = document.getElementsByClassName('js-background')[0],
@@ -30,12 +29,12 @@ var background = document.getElementsByClassName('js-background')[0],
         ],
         'leg-lower-right': [
           'none',
-          'foot',
+          'feet',
           'details'
         ],
         'leg-lower-left': [
           'none',
-          'foot',
+          'feet',
           'details'
         ],
         'arm-upper-left': [
@@ -119,7 +118,7 @@ for (var i = 0;i < configurable.length; i++) {
   });
 }
 
-var handleInput = function(target) {
+function handleInput(target) {
   var isActive = target ? target.classList.contains('active') : false;
   var isBodyPart = target.classList.contains('js-configurable');
 
@@ -138,7 +137,7 @@ var handleInput = function(target) {
 
 };
 
-var makeForm = function(bodyPart) {
+function makeForm(bodyPart) {
   bodyPart.classList.add('active');
 
   var fields = document.createElement('DIV');
@@ -173,7 +172,7 @@ var makeForm = function(bodyPart) {
         var button = document.createElement('A');
           button.setAttribute('href','#');
           button.dataset.attribute = key;
-          button.dataset.newClass = key + (config[key].min + i);
+          button.dataset.number = config[key].min + i;
           button.className = 'attr-' + key + i + ' button-' + config[key].form + ' button js-list js-input';
 
           if (config[key].form === 'names') {
@@ -188,14 +187,14 @@ var makeForm = function(bodyPart) {
   }
 
   form.appendChild(fields);
-  setActiveButtons(bodyPart.id,storedBody);
+  setActiveButtons(bodyPart.id, storedBody);
 
   /* Event handlers for our new buttons */
   for (var i = 0; i < buttons.length; i++) {
     buttons[i].addEventListener('click', function(ev) {
       var target = ev.currentTarget;
 
-      updateData(bodyPart, target.dataset.attribute, target.dataset.newClass);
+      updateData(bodyPart, target.dataset.attribute, parseInt(target.dataset.number));
       ev.stopImmediatePropagation();
     });
   }
@@ -204,8 +203,7 @@ var makeForm = function(bodyPart) {
 
 };
 
-/* Form positioning */
-var positionForm = function(el) {
+function positionForm(el) {
   if (!el) return false;
   var topSpace = Math.floor(el.getBoundingClientRect().top);
   var rightSpace = Math.floor(el.getBoundingClientRect().right);
@@ -218,8 +216,7 @@ var positionForm = function(el) {
   form.style.left = !isRight ? rightSpace + 40 + 'px' : rightSpace - (formWidth + partHeight) - 20  + 'px';
 }
 
-/* Manipulate attributes */
-var getClassFromEl = function(el, attributeName) {
+function getClassFromEl(el, attributeName) {
   var regex = new RegExp(attributeName + '[0-9\-]');
   for (var i = 0; i < el.classList.length; i++) {
     if (el.classList[i].match(regex)) {
@@ -228,17 +225,16 @@ var getClassFromEl = function(el, attributeName) {
   }
 };
 
-var getNumberFromClass = function(className) {
+function getNumberFromClass(className) {
   var index = className.search(/[0-9\-]/);
   return parseInt(className.substr(index));
 };
 
-var updateData = function(el, attribute, newClass) {
+function updateData(el, attribute, number) {
   var activePart = el.id;
 
-
   /* Update data */
-  storedBody[el.id][attribute] = newClass;
+  storedBody[el.id][attribute] = number;
 
   /* Update body based on data */
   setBodyPart(activePart, storedBody);
@@ -249,12 +245,11 @@ var updateData = function(el, attribute, newClass) {
 };
 
 
-var setActiveButtons = function(activePart, data) {
+function setActiveButtons(activePart, data) {
 
-  // iterate through buttons + iterate through data looking for matches
   for (var i = 0; i < buttons.length; i++) {
     var attribute = buttons[i].dataset.attribute;
-    if (data[activePart][attribute] === buttons[i].dataset.newClass) {
+    if (data[activePart][attribute] === parseInt(buttons[i].dataset.number)) {
       buttons[i].classList.add('active');
     } else if (buttons[i].classList.contains('active')) {
       buttons[i].classList.remove('active');
@@ -263,13 +258,13 @@ var setActiveButtons = function(activePart, data) {
 
 };
 
-var setBodyPart = function(activePart, data) {
+function setBodyPart(activePart, data) {
 
   var el = document.getElementById(activePart);
 
   for (attribute in data[activePart]) {
-    var currentClass = getClassFromEl(el,attribute);
-    var newClass = data[activePart][attribute];
+    var currentClass = getClassFromEl(el, attribute);
+    var newClass = attribute + data[activePart][attribute];
 
     el.classList.remove(currentClass);
     el.classList.add(newClass);
@@ -305,7 +300,7 @@ var setBodyPart = function(activePart, data) {
 };
 
 /* Initial data model */
-var getDatafromElements = function(els) {
+function getDatafromElements(els) {
 
   for (var i = 0; i < els.length; i++) {
     var el = els[i];
@@ -317,7 +312,8 @@ var getDatafromElements = function(els) {
     for (var key in config) {
       var match = els[i].className.search(key);
       if (match > -1) {
-        var value = getClassFromEl(el, key);
+        var className = getClassFromEl(el, key);
+        var value = getNumberFromClass(className);
         storedBody[els[i].id][key] = value;
       }
     }
@@ -325,9 +321,9 @@ var getDatafromElements = function(els) {
   return storedBody;
 };
 
-var initialize = function() {
+function initialize() {
 
-  // Need to actually save data to params
+  // TODO actually save data to params
   var params = false;
 
   if (params) {
