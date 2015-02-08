@@ -90,7 +90,6 @@ input[type=range] {
   display:inline-block!important;
   vertical-align:middle;
   height:15px;
-  padding: 5px;
   background:rgba(0,0,0,0.25);
   width: 100%;
   overflow:hidden;
@@ -113,8 +112,8 @@ input[type=range]::-ms-tooltip      { display:none; }
  * on their own so dont group them */
 input[type=range]::-webkit-slider-thumb {
   background:rgba(0,0,0,.5);
-  height:5px; width:5px;
-  border-radius: 50%;
+  height:15px; width:15px;
+  box-shadow:rgba(0,0,0,0.25) -1200px 0 0 1200px;
   cursor:ew-resize;
   }
 

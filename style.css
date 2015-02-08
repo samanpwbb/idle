@@ -392,7 +392,6 @@ This is very ugly :(
 
 #hand-right,
 #hand-left {
-  background-color: inherit;
   border-radius: 50%;
   width: 4vmin;
   height: 4vmin;

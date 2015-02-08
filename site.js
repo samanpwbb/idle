@@ -1,13 +1,11 @@
 /* TODO
-1. Fix state bugginess (changing width resets color???)
-2. Intro animation
-3. Make hands 'special' and add alternatives
-4. More interesting form elements, direct select up/down/left/right
-5. Add share button / UI
-6. Don't use for (key in object), use Object.keys instead
-7. Save to url shortener service
-8. Highlight limb matches
-9. Proper mobile support.
+1. Intro animation
+2. Make hands 'special' and add alternatives
+3. Add share button / UI
+4. Don't use for (key in object), use Object.keys instead
+5. Save to url shortener service
+6. Highlight limb matches
+7. Proper mobile support.
 */
 
 var background = document.getElementsByClassName('js-background')[0],
@@ -288,12 +286,13 @@ function updateData(activePart, attribute, number) {
   /* Update data */
   storedBody[activePart][attribute] = number;
 
-  /* Update body based on data */
+  /* Update body */
   setBodyPart(activePart, storedBody);
 
-  /* Update form based on data */
+  /* Update form */
   makeForm(document.getElementById(activePart));
 
+  /* Update query string */
   makeQueryString(storedBody);
 
 };
@@ -308,24 +307,6 @@ function setBodyPart(activePart, data) {
 
     el.classList.remove(currentClass);
     el.classList.add(newClass);
-
-    /* Match leg heights to each other */
-    if (activePart.indexOf('leg') > -1) {
-      var pair = 'leg-' +
-        (activePart.indexOf('lower') > -1 ? 'lower-' : 'upper-') +
-        (activePart.indexOf('left') > -1 ? 'right' : 'left');
-      document.getElementById(pair).classList.remove(currentClass);
-      document.getElementById(pair).classList.add(newClass);
-    };
-
-    /* Match arm heights to each other */
-    if (activePart.indexOf('arm') > -1) {
-      var pair = 'arm-' +
-        (activePart.indexOf('lower') > -1 ? 'lower-' : 'upper-') +
-        (activePart.indexOf('left') > -1 ? 'right' : 'left');
-      document.getElementById(pair).classList.remove(currentClass);
-      document.getElementById(pair).classList.add(newClass);
-    };
 
     /* Exception for chest - this is ugly */
     if (activePart === 'chest' && attribute === ('width' || 'vertical gap')) {
@@ -342,12 +323,15 @@ function setBodyPart(activePart, data) {
 function makeQueryString(data) {
 
   var stringified = '';
-  for (key in data) {
+  var keys = Object.keys(data);
+  for (var i = 0; i < keys.length; i++) {
     stringified += queryString.stringify({
-      part: key,
-      nested: JSON.stringify(data[key])
+      part: keys[i],
+      nested: JSON.stringify(data[keys[i]])
     });
-    stringified += '&';
+    if (i !== (keys.length - 1)) {
+      stringified += '&';
+    }
   }
   window.location.hash = stringified;
 
