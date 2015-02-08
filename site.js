@@ -7,18 +7,18 @@
 6. Don't use for (key in object), use Object.keys instead
 7. Save to url shortener service
 8. Highlight limb matches
+9. Proper mobile support.
 */
 
 var background = document.getElementsByClassName('js-background')[0],
   form = document.getElementsByClassName('js-form')[0],
-  buttons = document.getElementsByClassName('js-input');
-  configurable = document.getElementsByClassName('js-configurable'),
+  bodyparts = document.getElementsByClassName('js-configurable'),
   storedBody = {},
   config = {
     'special': {
       'min':0,
       'max':2,
-      'form': 'names',
+      'form': 'list',
       'names': {
         'eyes': [
           'none',
@@ -57,6 +57,21 @@ var background = document.getElementsByClassName('js-background')[0],
       'max':17,
       'form': 'list'
     },
+    'margint': {
+      'min':-4,
+      'max':4,
+      'form': 'position'
+    },
+    'marginb': {
+      'min':-4,
+      'max':4,
+      'form': 'position'
+    },
+    'marginx': {
+      'min':-4,
+      'max':4,
+      'form': 'position'
+    },
     'height': {
       'min':4,
       'max':12,
@@ -69,16 +84,6 @@ var background = document.getElementsByClassName('js-background')[0],
     },
     'radius': {
       'min':1,
-      'max':4,
-      'form': 'increment'
-    },
-    'marginy': {
-      'min':-4,
-      'max':4,
-      'form': 'increment'
-    },
-    'marginx': {
-      'min':-4,
       'max':4,
       'form': 'increment'
     }
@@ -101,23 +106,24 @@ background.addEventListener('click', function(ev) {
   }
 });
 
-for (var i = 0;i < configurable.length; i++) {
-  configurable[i].addEventListener('mouseover', function(ev) {
-    for (var i = 0; i < configurable.length; i++) {
-      configurable[i].classList.remove('hover');
+for (var i = 0;i < bodyparts.length; i++) {
+  bodyparts[i].addEventListener('mouseover', function(ev) {
+    for (var i = 0; i < bodyparts.length; i++) {
+      bodyparts[i].classList.remove('hover');
     }
     ev.currentTarget.classList.add('hover');
     ev.stopPropagation();
   });
 
-  configurable[i].addEventListener('mouseleave', function(ev) {
+  bodyparts[i].addEventListener('mouseleave', function(ev) {
     ev.currentTarget.classList.remove('hover');
     ev.stopPropagation();
   });
 
-  configurable[i].addEventListener('click', function(ev) {
+  bodyparts[i].addEventListener('click', function(ev) {
+    if (ev.target.classList.contains('button')) return false;
     handleInput(ev.currentTarget);
-    ev.stopImmediatePropagation();
+    ev.stopPropagation();
   });
 }
 
@@ -125,24 +131,33 @@ function handleInput(target) {
   var isActive = target ? target.classList.contains('active') : false;
   var isBodyPart = target.classList.contains('js-configurable');
 
-  for (var i = 0; i < configurable.length; i++) {
-    configurable[i].classList.remove('active');
-  }
-
-  form.innerHTML = '';
+  resetBody();
 
   if (!isActive && isBodyPart) {
     makeForm(target);
+    positionForm(target);
   } else {
+    resetForm();
     form.style.bottom = null;
     form.style.left = null;
   }
 
 };
 
-function makeForm(bodyPart) {
-  bodyPart.classList.add('active');
+function resetBody() {
+  for (var i = 0; i < bodyparts.length; i++) {
+    bodyparts[i].classList.remove('active');
+  }
+}
 
+function resetForm() {
+  form.innerHTML = '';
+};
+
+function makeForm(bodyPart) {
+  resetForm();
+
+  bodyPart.classList.add('active');
   var fields = document.createElement('DIV');
     fields.id = 'form-' + bodyPart.id;
     fields.className = 'js-fields fields in animate-opacity';
@@ -156,52 +171,88 @@ function makeForm(bodyPart) {
       field.id = 'field-' + key;
       field.className = 'cf field js-field';
 
-    var label = document.createElement('DIV');
-      label.className = 'block label';
 
     // Only labels for increments
     if (config[key].form === 'increment') {
+      var label = document.createElement('DIV');
+        label.className = 'block label';
+
       var labelText = document.createTextNode(key);
-      label.appendChild(labelText);
+        label.appendChild(labelText);
+        field.appendChild(label);
     }
 
-    field.appendChild(label);
 
     if (match > -1) {
       fields.appendChild(field);
 
-      // Create buttons
-      for (var i = 0; i < count;i++ ) {
-        var button = document.createElement('BUTTON');
-          button.dataset.attribute = key;
-          button.dataset.number = config[key].min + i;
-          button.className = 'attr-' + key + i + ' button-' + config[key].form + ' button js-list js-input';
-
-          if (config[key].form === 'names') {
-            var nameList = config[key].names[bodyPart.id];
-            var buttonName = document.createTextNode(nameList[i]);
-            button.appendChild(buttonName);
+      // Create form elements
+      switch (config[key].form) {
+        case 'list':
+          for (var i = 0; i < count;i++ ) {
+            var button = document.createElement('BUTTON');
+            button.dataset.attribute = key;
+            button.dataset.bodypart = bodyPart.id;
+            button.dataset.number = config[key].min + i;
+            button.className = 'attr-' + key + i + ' button-' + config[key].form + ' button js-input';
+            if (config[key].names) {
+              var nameList = config[key].names[bodyPart.id];
+              var buttonName = document.createTextNode(nameList[i]);
+              button.appendChild(buttonName);
+            }
+            if (parseInt(button.dataset.number) === storedBody[bodyPart.id][key]) {
+              button.className += ' active';
+            }
+            button.addEventListener('click', function() {
+              updateData(this.dataset.bodypart, this.dataset.attribute, parseInt(this.dataset.number));
+            });
+            field.appendChild(button);
           }
+        break;
+        case 'position':
+          for (var i = 0; i < 2; i++) {
+            var button = document.createElement('BUTTON');
+            var change = (i === 0) ? -2 : 2;
 
-        field.appendChild(button);
+            button.dataset.attribute = key;
+            button.dataset.bodypart = bodyPart.id;
+            button.dataset.number = storedBody[bodyPart.id][key] + change;
+            button.className = key + ' position' + change + ' button-' + config[key].form + ' js-input button ';
+
+            if (parseInt(button.dataset.number) > config[key].max || parseInt(button.dataset.number) < config[key].min) {
+              button.className += ' disable ';
+            }
+
+            button.addEventListener('click', function() {
+              updateData(this.dataset.bodypart, this.dataset.attribute, parseInt(this.dataset.number));
+            });
+
+            field.appendChild(button);
+          }
+        break;
+        case 'increment':
+          var range = document.createElement('INPUT');
+          range.type = 'range';
+          range.dataset.attribute = key;
+          range.dataset.bodypart = bodyPart.id;
+          range.className = 'button-' + config[key].form + ' js-input';
+          range.step = 1;
+          range.min = config[key].min;
+          range.max = config[key].max;
+          range.value = storedBody[bodyPart.id][key];
+          range.addEventListener('change', function() {
+            updateData(this.dataset.bodypart, this.dataset.attribute, parseInt(this.value));
+          });
+          field.appendChild(range);
+        break;
+
+        default:
+        break;
       }
     }
   }
 
   form.appendChild(fields);
-  setActiveButtons(bodyPart.id, storedBody);
-
-  /* Event handlers for our new buttons */
-  for (var i = 0; i < buttons.length; i++) {
-    buttons[i].addEventListener('click', function(ev) {
-      var target = ev.currentTarget;
-
-      updateData(bodyPart, target.dataset.attribute, parseInt(target.dataset.number));
-      ev.stopImmediatePropagation();
-    });
-  }
-
-  positionForm(bodyPart);
 
 };
 
@@ -232,33 +283,18 @@ function getNumberFromClass(className) {
   return parseInt(className.substr(index));
 };
 
-function updateData(el, attribute, number) {
-  var activePart = el.id;
+function updateData(activePart, attribute, number) {
 
   /* Update data */
-  storedBody[el.id][attribute] = number;
+  storedBody[activePart][attribute] = number;
 
   /* Update body based on data */
   setBodyPart(activePart, storedBody);
 
   /* Update form based on data */
-  setActiveButtons(activePart, storedBody);
+  makeForm(document.getElementById(activePart));
 
   makeQueryString(storedBody);
-
-};
-
-
-function setActiveButtons(activePart, data) {
-
-  for (var i = 0; i < buttons.length; i++) {
-    var attribute = buttons[i].dataset.attribute;
-    if (data[activePart][attribute] === parseInt(buttons[i].dataset.number)) {
-      buttons[i].classList.add('active');
-    } else if (buttons[i].classList.contains('active')) {
-      buttons[i].classList.remove('active');
-    }
-  }
 
 };
 
@@ -365,9 +401,10 @@ function initialize() {
       setBodyPart(part, storedBody);
     }
   } else {
-    storedBody = getDataFromElements(configurable);
+    storedBody = getDataFromElements(bodyparts);
   }
 
 };
 
 initialize();
+

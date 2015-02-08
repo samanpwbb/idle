@@ -46,6 +46,9 @@ i {
 .inline { display: inline-block;}
 .fl { float: left;}
 
+/* Form elements
+-------------------------------------------------*/
+
 button {
   font: bold 12px/15px Menlo, consolas, monospace;
   text-transform: uppercase;
@@ -59,6 +62,8 @@ button {
   text-align: left;
   text-decoration: none;
   text-indent: 0;
+  appearance: none;
+  -webkit-appearance: none;
 }
 
 button:focus {
@@ -73,6 +78,48 @@ button:hover {
 button::-moz-focus-inner {
     border: 0;
     padding: 0;
+}
+
+input[type=range],
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance:none;
+  margin:0; padding:0; border:0;
+  }
+input[type=range] {
+  border-radius: 3px;
+  display:inline-block!important;
+  vertical-align:middle;
+  height:15px;
+  padding: 5px;
+  background:rgba(0,0,0,0.25);
+  width: 100%;
+  overflow:hidden;
+  cursor:pointer;
+  }
+  input[type=range]::-ms-fill-upper { background:transparent; }
+  input[type=range]::-ms-fill-lower { background:rgba(255,255,255,0.25); }
+
+input[type=range]:focus {
+  outline-offset: 0;
+  outline: none;
+}
+
+/* Browser thingies */
+input[type=range]::-moz-range-track { opacity:0; }
+input[type=range]::-ms-track        { opacity:0; }
+input[type=range]::-ms-tooltip      { display:none; }
+
+/* For whatever reason, these need to be defined
+ * on their own so dont group them */
+input[type=range]::-webkit-slider-thumb {
+  background:rgba(0,0,0,.5);
+  height:5px; width:5px;
+  border-radius: 50%;
+  cursor:ew-resize;
+  }
+
+input[type=range]:hover::-webkit-slider-thumb {
+  background:rgba(0,0,0,.75);
 }
 
 /* Positioning
