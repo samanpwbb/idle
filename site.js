@@ -6,6 +6,7 @@
 5. Save to url shortener service
 6. Highlight limb matches
 7. Proper mobile support.
+8. Bring back proper matching with getter/setters???
 */
 
 var background = document.getElementsByClassName('js-background')[0],
@@ -65,7 +66,12 @@ var background = document.getElementsByClassName('js-background')[0],
       'max':4,
       'form': 'position'
     },
-    'marginx': {
+    'marginl': {
+      'min':-4,
+      'max':4,
+      'form': 'position'
+    },
+    'marginr': {
       'min':-4,
       'max':4,
       'form': 'position'

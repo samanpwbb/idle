@@ -75,6 +75,9 @@ button:hover {
   cursor: pointer;
 }
 
+input::-moz-focus-inner { outline: 0; border: 0; zoom: normal; }
+
+input[type=range]::-moz-focus-inner,
 button::-moz-focus-inner {
     border: 0;
     padding: 0;
@@ -86,6 +89,7 @@ input[type=range]::-webkit-slider-thumb {
   margin:0; padding:0; border:0;
   }
 input[type=range] {
+  margin:0; padding:0; border:0;
   border-radius: 3px;
   display:inline-block!important;
   vertical-align:middle;
@@ -95,27 +99,40 @@ input[type=range] {
   overflow:hidden;
   cursor:pointer;
   }
-  input[type=range]::-ms-fill-upper { background:transparent; }
-  input[type=range]::-ms-fill-lower { background:rgba(255,255,255,0.25); }
+input[type=range]::-ms-fill-upper { background:transparent; }
+input[type=range]::-ms-fill-lower { background:rgba(255,255,255,0.25); }
 
-input[type=range]:focus {
+input[type=range]:focus,
+input[type=range]:active {
   outline-offset: 0;
   outline: none;
 }
 
-/* Browser thingies */
 input[type=range]::-moz-range-track { opacity:0; }
 input[type=range]::-ms-track        { opacity:0; }
 input[type=range]::-ms-tooltip      { display:none; }
 
-/* For whatever reason, these need to be defined
- * on their own so dont group them */
+/* These need to be defined on their own so dont group them */
 input[type=range]::-webkit-slider-thumb {
   background:rgba(0,0,0,.5);
   height:15px; width:15px;
+  border-radius: 0;
   box-shadow:rgba(0,0,0,0.25) -1200px 0 0 1200px;
-  cursor:ew-resize;
-  }
+}
+
+input[type=range]::-moz-range-thumb {
+  background:rgba(0,0,0,.5);
+  height:15px; width:15px;
+  border-radius: 0;
+  box-shadow:rgba(0,0,0,0.25) -1200px 0 0 1200px;
+}
+
+input[type=range]::-ms-thumb {
+  background:rgba(0,0,0,.5);
+  height:15px; width:15px;
+  border-radius: 0;
+  box-shadow:rgba(0,0,0,0.25) -1200px 0 0 1200px;
+}
 
 input[type=range]:hover::-webkit-slider-thumb {
   background:rgba(0,0,0,.75);
@@ -260,24 +277,6 @@ input[type=range]:hover::-webkit-slider-thumb {
 
 /* Margins
 -------------------------------------------------*/
-
-[id*='-left'] .marginx-1 { margin-left: -1vmin;}
-[id*='-left'] .marginx-2 { margin-left: -2vmin;}
-[id*='-left'] .marginx-3 { margin-left: -3vmin;}
-[id*='-left'] .marginx-4 { margin-left: -4vmin;}
-[id*='-left'] .marginx1  { margin-left: 1vmin;}
-[id*='-left'] .marginx2  { margin-left: 2vmin;}
-[id*='-left'] .marginx3  { margin-left: 3vmin;}
-[id*='-left'] .marginx4  { margin-left: 4vmin;}
-
-[id*='-right'] .marginx-1 { margin-right: -1vmin;}
-[id*='-right'] .marginx-2 { margin-right: -2vmin;}
-[id*='-right'] .marginx-3 { margin-right: -3vmin;}
-[id*='-right'] .marginx-4 { margin-right: -4vmin;}
-[id*='-right'] .marginx1 { margin-right: 1vmin;}
-[id*='-right'] .marginx2 { margin-right: 2vmin;}
-[id*='-right'] .marginx3 { margin-right: 3vmin;}
-[id*='-right'] .marginx4 { margin-right: 4vmin;}
 
 .marginl1 { margin-left: 1vmin;}
 .marginl2 { margin-left: 2vmin;}
