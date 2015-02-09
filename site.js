@@ -84,6 +84,7 @@ var background = document.getElementsByClassName('js-background')[0],
 
 /* UI Basics */
 var timer = null;
+
 window.onresize = function() {
   if (timer != null) clearTimeout(timer);
 
@@ -125,12 +126,16 @@ function handleInput(target) {
   var isBodyPart = target.classList.contains('js-configurable');
 
   resetBody();
-  form.classList.add('in');
 
   if (!isActive && isBodyPart) {
+    form.classList.add('in');
+    window.setTimeout(function() {
+      form.classList.add('animate-all');
+    }, 250);
     makeForm(target);
     positionForm(target);
   } else {
+    form.classList.remove('animate-all');
     form.classList.remove('in');
 
     window.setTimeout(function() {

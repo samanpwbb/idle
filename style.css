@@ -452,15 +452,15 @@
 
 #body-container {
   opacity: 0;
-  animation: intro 1s 0 1 normal both;
+  animation: intro 1s 0s 1 normal both;
 }
 
 .form {
-  animation: fadeOut .25s 0 1 normal both;
+  animation: fadeOut .25s 0s 1 normal both;
 }
 
 .form.in {
-  animation: fadeIn .25s 0 1 normal both;
+  animation: fadeIn .25s 0s 1 normal both;
 }
 
 @keyframes intro {

@@ -40,8 +40,8 @@ i {
               margin .2s;
 }
 
-.in.animate-all {
-  transition:all .2s;
+.animate-all {
+  transition: all .2s;
 }
 
 .relative { position: relative;}
