@@ -12,7 +12,8 @@ body {
   box-sizing: inherit;
 }
 
-.selectable {
+.selectable,
+.selectable * {
   user-select: all;
 }
 
@@ -149,6 +150,22 @@ input[type=range]::-ms-thumb {
 
 input[type=range]:hover::-webkit-slider-thumb {
   background:rgba(0,0,0,.75);
+}
+
+input[type=text],
+input[type=text]:focus,
+input[type=text]:active {
+  margin: 0;
+  border: 0;
+  cursor: pointer;
+  padding: 0;
+  outline: none;
+  display: inline-block;
+  width: auto;
+  font: bold 12px/15px Menlo, consolas, monospace;
+  letter-spacing: 2px;
+  box-sizing: border-box;
+  color: rgba(0,0,0,.5);
 }
 
 /* Positioning

@@ -395,6 +395,8 @@ function initialize() {
 initialize();
 
 /* sharing */
+
+
 function getShortUrl() {
   var request = new XMLHttpRequest();
   var longUrl = window.location.origin + window.location.pathname + encodeURIComponent(window.location.hash);
@@ -403,25 +405,18 @@ function getShortUrl() {
 
   request.onload = function() {
     if (request.status >= 200 && request.status < 400) {
-      // Success!
       var data = JSON.parse(request.responseText).data;
       renderShortUrl(data.url);
-    } else {
-      // We reached our target server, but it returned an error
-      // TODO
     }
-  };
-
-  request.onerror = function() {
-    // There was a connection error of some sort
-    // TODO
   };
 
   request.send();
 }
 
+document.getElementsByClassName('js-share')[0].addEventListener('click', function() {
+  this.select();
+});
+
 function renderShortUrl(url) {
-  if (url) {
-    document.getElementsByClassName('js-share')[0].innerHTML = 'share: ' + url;
-  }
+  document.getElementsByClassName('js-share')[0].value = url || 'not available';
 }
