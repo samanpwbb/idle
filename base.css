@@ -291,53 +291,53 @@ input[type=range]:hover::-webkit-slider-thumb {
 /* Margins
 -------------------------------------------------*/
 
-.marginl1 { margin-left: 1vmin;}
-.marginl2 { margin-left: 2vmin;}
-.marginl3 { margin-left: 3vmin;}
-.marginl4 { margin-left: 4vmin;}
+.mgnl1 { margin-left: 1vmin;}
+.mgnl2 { margin-left: 2vmin;}
+.mgnl3 { margin-left: 3vmin;}
+.mgnl4 { margin-left: 4vmin;}
 
-.marginl-1 { margin-left: -1vmin;}
-.marginl-2 { margin-left: -2vmin;}
-.marginl-3 { margin-left: -3vmin;}
-.marginl-4 { margin-left: -4vmin;}
+.mgnl-1 { margin-left: -1vmin;}
+.mgnl-2 { margin-left: -2vmin;}
+.mgnl-3 { margin-left: -3vmin;}
+.mgnl-4 { margin-left: -4vmin;}
 
-.marginr1 { margin-right: 1vmin;}
-.marginr2 { margin-right: 2vmin;}
-.marginr3 { margin-right: 3vmin;}
-.marginr4 { margin-right: 4vmin;}
+.mgnr1 { margin-right: 1vmin;}
+.mgnr2 { margin-right: 2vmin;}
+.mgnr3 { margin-right: 3vmin;}
+.mgnr4 { margin-right: 4vmin;}
 
-.marginr-1 { margin-right: -1vmin;}
-.marginr-2 { margin-right: -2vmin;}
-.marginr-3 { margin-right: -3vmin;}
-.marginr-4 { margin-right: -4vmin;}
+.mgnr-1 { margin-right: -1vmin;}
+.mgnr-2 { margin-right: -2vmin;}
+.mgnr-3 { margin-right: -3vmin;}
+.mgnr-4 { margin-right: -4vmin;}
 
-.margint1 { margin-top: 1vmin;}
-.margint2 { margin-top: 2vmin;}
-.margint3 { margin-top: 3vmin;}
-.margint4 { margin-top: 4vmin;}
+.mgnt1 { margin-top: 1vmin;}
+.mgnt2 { margin-top: 2vmin;}
+.mgnt3 { margin-top: 3vmin;}
+.mgnt4 { margin-top: 4vmin;}
 
-.margint-1 { margin-top: -1vmin;}
-.margint-2 { margin-top: -2vmin;}
-.margint-3 { margin-top: -3vmin;}
-.margint-4 { margin-top: -4vmin;}
+.mgnt-1 { margin-top: -1vmin;}
+.mgnt-2 { margin-top: -2vmin;}
+.mgnt-3 { margin-top: -3vmin;}
+.mgnt-4 { margin-top: -4vmin;}
 
-.marginb1 { margin-bottom: 1vmin;}
-.marginb2 { margin-bottom: 2vmin;}
-.marginb3 { margin-bottom: 3vmin;}
-.marginb4 { margin-bottom: 4vmin;}
+.mgnb1 { margin-bottom: 1vmin;}
+.mgnb2 { margin-bottom: 2vmin;}
+.mgnb3 { margin-bottom: 3vmin;}
+.mgnb4 { margin-bottom: 4vmin;}
 
-.marginb-1 { margin-bottom: -1vmin;}
-.marginb-2 { margin-bottom: -2vmin;}
-.marginb-3 { margin-bottom: -3vmin;}
-.marginb-4 { margin-bottom: -4vmin;}
+.mgnb-1 { margin-bottom: -1vmin;}
+.mgnb-2 { margin-bottom: -2vmin;}
+.mgnb-3 { margin-bottom: -3vmin;}
+.mgnb-4 { margin-bottom: -4vmin;}
 
 /* Padding
 -------------------------------------------------*/
 
-.pad1            { padding: 1vmin; }
-.pad2            { padding: 2vmin; }
-.pad3            { padding: 3vmin; }
-.pad4            { padding: 4vmin; }
+.pad1 { padding: 1vmin; }
+.pad2 { padding: 2vmin; }
+.pad3 { padding: 3vmin; }
+.pad4 { padding: 4vmin; }
 
 /* Border radius
 -------------------------------------------------*/
@@ -359,21 +359,21 @@ input[type=range]:hover::-webkit-slider-thumb {
 
 /* Colors
 -------------------------------------------------*/
-.attr-background0, .background0   { background-color: #DFAC81; color: #DFAC81; }
-.attr-background1, .background1   { background-color: #0D3864; color: #0D3864;  }
-.attr-background2, .background2   { background-color: #0074D9; color: #0074D9;  }
-.attr-background3, .background3   { background-color: #7FDBFF; color: #7FDBFF;  }
-.attr-background4, .background4   { background-color: #39CCCC; color: #39CCCC;  }
-.attr-background5, .background5   { background-color: #3D9970; color: #3D9970;  }
-.attr-background6, .background6   { background-color: #2ECC40; color: #2ECC40;  }
-.attr-background7, .background7   { background-color: #33EA51; color: #33EA51;  }
-.attr-background8, .background8   { background-color: #FFDC00; color: #FFDC00;  }
-.attr-background9, .background9   { background-color: #FF851B; color: #FF851B;  }
-.attr-background10, .background10 { background-color: #FF4136; color: #FF4136; }
-.attr-background11, .background11 { background-color: #F012BE; color: #F012BE; }
-.attr-background12, .background12 { background-color: #B34CC2; color: #B34CC2; }
-.attr-background13, .background13 { background-color: #85144B; color: #85144B; }
-.attr-background14, .background14 { background-color: #111; color: #111; }
-.attr-background15, .background15 { background-color: #aaa; color: #aaa; }
-.attr-background16, .background16 { background-color: #ddd; color: #ddd; }
-.attr-background17, .background17 { background-color: transparent; color: transparent; }
+.attr-bg0, .bg0   { background-color: #DFAC81; color: #DFAC81; }
+.attr-bg1, .bg1   { background-color: #0D3864; color: #0D3864;  }
+.attr-bg2, .bg2   { background-color: #0074D9; color: #0074D9;  }
+.attr-bg3, .bg3   { background-color: #7FDBFF; color: #7FDBFF;  }
+.attr-bg4, .bg4   { background-color: #39CCCC; color: #39CCCC;  }
+.attr-bg5, .bg5   { background-color: #3D9970; color: #3D9970;  }
+.attr-bg6, .bg6   { background-color: #2ECC40; color: #2ECC40;  }
+.attr-bg7, .bg7   { background-color: #33EA51; color: #33EA51;  }
+.attr-bg8, .bg8   { background-color: #FFDC00; color: #FFDC00;  }
+.attr-bg9, .bg9   { background-color: #FF851B; color: #FF851B;  }
+.attr-bg10, .bg10 { background-color: #FF4136; color: #FF4136; }
+.attr-bg11, .bg11 { background-color: #F012BE; color: #F012BE; }
+.attr-bg12, .bg12 { background-color: #B34CC2; color: #B34CC2; }
+.attr-bg13, .bg13 { background-color: #85144B; color: #85144B; }
+.attr-bg14, .bg14 { background-color: #111; color: #111; }
+.attr-bg15, .bg15 { background-color: #aaa; color: #aaa; }
+.attr-bg16, .bg16 { background-color: #ddd; color: #ddd; }
+.attr-bg17, .bg17 { background-color: transparent; color: transparent; }

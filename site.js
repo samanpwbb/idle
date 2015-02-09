@@ -3,7 +3,7 @@ var background = document.getElementsByClassName('js-background')[0],
   bodyparts = document.getElementsByClassName('js-configurable'),
   storedBody = {},
   config = {
-    'special': {
+    'sp': {
       'min':0,
       'max':2,
       'form': 'list',
@@ -40,27 +40,27 @@ var background = document.getElementsByClassName('js-background')[0],
         ]
       }
     },
-    'background': {
+    'bg': {
       'min':0,
       'max':17,
       'form': 'list'
     },
-    'margint': {
+    'mgnt': {
       'min':-4,
       'max':4,
       'form': 'position'
     },
-    'marginb': {
+    'mgnb': {
       'min':-4,
       'max':4,
       'form': 'position'
     },
-    'marginl': {
+    'mgnl': {
       'min':-4,
       'max':4,
       'form': 'position'
     },
-    'marginr': {
+    'mgnr': {
       'min':-4,
       'max':4,
       'form': 'position'
@@ -318,32 +318,31 @@ function setBodyPart(activePart, data) {
 
 function makeQueryString(data) {
 
-  var stringified = '';
   var keys = Object.keys(data);
+  var encoded = '';
+
   for (var i = 0; i < keys.length; i++) {
-    stringified += queryString.stringify({
-      part: keys[i],
-      nested: JSON.stringify(data[keys[i]])
-    });
+    encoded += encodeURIComponent(JSON.stringify(data[keys[i]]));
     if (i !== (keys.length - 1)) {
-      stringified += '&';
+      encoded += '&';
     }
   }
-  window.location.hash = stringified;
 
-  getDataFromQueryString(stringified);
+  window.location.hash = encoded;
+
 };
 
 function getDataFromQueryString(querystring) {
-  var data = queryString.parse(querystring);
+  var arrayOfStrings = decodeURIComponent(querystring).split('#').pop().split('&');
+
   var attributes = []
-  for (var i = 0; i < data.nested.length; i++) {
-    attributes.push(JSON.parse(data.nested[i]));
+  for (var i = 0; i < arrayOfStrings.length; i++) {
+    attributes.push(JSON.parse(arrayOfStrings[i]));
   }
 
   var newBody = {};
   for (var i = 0; i < attributes.length; i++) {
-    newBody[data.part[i]] = attributes[i];
+    newBody[bodyparts[i].id] = attributes[i];
   }
 
   return newBody;
@@ -391,11 +390,11 @@ function initialize() {
 initialize();
 
 /* sharing */
-
 function getShortUrl() {
   var request = new XMLHttpRequest();
-  var url = 'https://api-ssl.bitly.com/v3/shorten?access_token=38ed1d345cbcbf9f7234601fca24aeb15d3939e5&longUrl=' + window.location.href;
-  request.open('GET', url, true);
+  var longUrl = window.location.origin + window.location.pathname + encodeURIComponent(window.location.hash);
+  var requestString = 'https://api-ssl.bitly.com/v3/shorten?access_token=38ed1d345cbcbf9f7234601fca24aeb15d3939e5&longUrl=' + longUrl;
+  request.open('GET', requestString, true);
 
   request.onload = function() {
     if (request.status >= 200 && request.status < 400) {

@@ -60,7 +60,7 @@
 .button-list:empty:nth-of-type(10) { border-bottom-left-radius: 4px;}
 .button-list:empty:last-of-type { border-bottom-right-radius: 4px;}
 
-.button-list.attr-background17 {
+.button-list.attr-bg17 {
   border-bottom: 2px solid rgba(0,0,0,.1);
   border-right: 2px solid rgba(0,0,0,.1);
 }
@@ -112,8 +112,8 @@
 }
 
 /* flip order for marginb marginr.*/
-.button-position.marginb,
-.button-position.marginr  {
+.button-position.mgnb,
+.button-position.mgnr  {
   float: right;
 }
 
@@ -133,29 +133,29 @@
   bottom: 0;
 }
 
-.button-position.marginb.position-1:before,
-.button-position.margint.position1:before {
+.button-position.mgnb.position-1:before,
+.button-position.mgnt.position1:before {
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
   border-top: 10px solid currentColor;
 }
 
-.button-position.marginb.position1:before,
-.button-position.margint.position-1:before {
+.button-position.mgnb.position1:before,
+.button-position.mgnt.position-1:before {
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
   border-bottom: 10px solid currentColor;
 }
 
-.button-position.marginr.position-1:before,
-.button-position.marginl.position1:before {
+.button-position.mgnr.position-1:before,
+.button-position.mgnl.position1:before {
   border-top: 6px solid transparent;
   border-bottom: 6px solid transparent;
   border-left: 10px solid currentColor;
 }
 
-.button-position.marginr.position1:before,
-.button-position.marginl.position-1:before {
+.button-position.mgnr.position1:before,
+.button-position.mgnl.position-1:before {
   border-top: 6px solid transparent;
   border-bottom: 6px solid transparent;
   border-right: 10px solid currentColor;
@@ -166,7 +166,7 @@
   pointer-events: none;
 }
 
-[id^='field-margin'] {
+[id^='field-mgn'] {
   height: 25px;
   border-radius: 3px;
   margin-right: 10px;
@@ -193,7 +193,7 @@
 -------------------------------------------------*/
 
 /* 1 */
-#head.special1:before {
+#head.sp1:before {
   content: '';
   background: inherit;
   position: absolute;
@@ -206,7 +206,7 @@
   z-index: -1;
 }
 
-#head.special2:before {
+#head.sp2:before {
   content: '';
   background: inherit;
   position: absolute;
@@ -230,14 +230,14 @@
 }
 
 /* 1 */
-#eyes.special1 #inner-eye {
+#eyes.sp1 #inner-eye {
   background-color: white;
   animation: ease-in-out blink1 2s 2s infinite alternate forwards;
 }
 
 /* 2 */
-#eyes.special2 #inner-eye:before,
-#eyes.special2 #inner-eye:after
+#eyes.sp2 #inner-eye:before,
+#eyes.sp2 #inner-eye:after
  {
   position: absolute;
   content: '';
@@ -251,7 +251,7 @@
   animation: ease-in-out blink2 2s 2s infinite alternate forwards;
 }
 
-#eyes.special2 #inner-eye:after {
+#eyes.sp2 #inner-eye:after {
   left: 2vmin;
   right: auto;
 }
@@ -259,8 +259,8 @@
 /* Legs
 -------------------------------------------------*/
 
-#leg-lower-right.special1:after,
-#leg-lower-left.special1:after {
+#leg-lower-right.sp1:after,
+#leg-lower-left.sp1:after {
   content: '';
   background: inherit;
   position: absolute;
@@ -272,7 +272,7 @@
   z-index: -1;
 }
 
-#leg-lower-left.special1:after {
+#leg-lower-left.sp1:after {
   left: -2vmin;
   right: 0;
 }
@@ -280,8 +280,8 @@
 /* Upper arms
 -------------------------------------------------*/
 
-#arm-upper-right.special1:after,
-#arm-upper-left.special1:after {
+#arm-upper-right.sp1:after,
+#arm-upper-left.sp1:after {
   content: '';
   background: inherit;
   position: absolute;
@@ -293,13 +293,13 @@
   z-index: -1;
 }
 
-#arm-upper-left.special1:after {
+#arm-upper-left.sp1:after {
   left: -2vmin;
   right: 0;
 }
 
-#arm-upper-right.special2:after,
-#arm-upper-left.special2:after {
+#arm-upper-right.sp2:after,
+#arm-upper-left.sp2:after {
   content: '';
   background: inherit;
   position: absolute;
@@ -313,7 +313,7 @@
   animation: ease-in-out wing-wiggle-left 1.5s .25s infinite alternate backwards;
 }
 
-#arm-upper-left.special2:after {
+#arm-upper-left.sp2:after {
   right: 0;
   left: auto;
   transform-origin: right;
@@ -321,8 +321,8 @@
 }
 
 
-#arm-upper-right.special2:before,
-#arm-upper-left.special2:before {
+#arm-upper-right.sp2:before,
+#arm-upper-left.sp2:before {
   content: '';
   background: inherit;
   position: absolute;
@@ -337,7 +337,7 @@
   animation: ease-in-out wing-wiggle-right2 1.5s .25s infinite alternate backwards;
 }
 
-#arm-upper-left.special2:before {
+#arm-upper-left.sp2:before {
   right: 9vmin;
   left: auto;
   transform-origin: right bottom;
