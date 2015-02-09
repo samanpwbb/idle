@@ -418,5 +418,11 @@ document.getElementsByClassName('js-share')[0].addEventListener('click', functio
 });
 
 function renderShortUrl(url) {
-  document.getElementsByClassName('js-share')[0].value = url || 'not available';
+  var val = url || 'not available'
+  var shareInput = document.getElementsByClassName('js-share')[0];
+
+  shareInput.value = val;
+  console.log(val.length);
+  shareInput.size = Math.floor(val.length * 1.3333);
+
 }
