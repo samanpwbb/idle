@@ -394,7 +394,7 @@ initialize();
 
 function getShortUrl() {
   var request = new XMLHttpRequest();
-  var url = 'http://api.bitly.com/v3/shorten?access_token=38ed1d345cbcbf9f7234601fca24aeb15d3939e5&longUrl=' + window.location.href;
+  var url = 'https://api-ssl.bitly.com/v3/shorten?access_token=38ed1d345cbcbf9f7234601fca24aeb15d3939e5&longUrl=' + window.location.href;
   request.open('GET', url, true);
 
   request.onload = function() {
