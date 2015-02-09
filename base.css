@@ -12,6 +12,10 @@ body {
   box-sizing: inherit;
 }
 
+.selectable {
+  user-select: all;
+}
+
 body { position: fixed; width: 100%; height: 100%;}
 
 .cf { display:block; }

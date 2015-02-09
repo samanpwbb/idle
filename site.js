@@ -418,6 +418,6 @@ function getShortUrl() {
 
 function renderShortUrl(url) {
   if (url) {
-    document.getElementsByClassName('js-share')[0].innerHTML = url;
+    document.getElementsByClassName('js-share')[0].innerHTML = 'share: ' + url;
   }
 }
