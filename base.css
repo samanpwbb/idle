@@ -1,7 +1,7 @@
 /* CSS designed for drawing */
 
 body {
-  font: bold 12px/15px Menlo, consolas, monospace;
+  font: normal 12px/15px Menlo, consolas, monospace;
   letter-spacing: 2px;
   box-sizing: border-box;
   color: rgba(0,0,0,.5);
@@ -36,15 +36,24 @@ i {
               margin .2s;
 }
 
-.animate-all,
-.animate-all:before,
-.animate-all:after {
+.in.animate-all {
   transition:all .2s;
 }
 
 .relative { position: relative;}
 .inline { display: inline-block;}
 .fl { float: left;}
+.fr { float: right;}
+
+a {
+  color: rgba(0,0,0,.5);
+  font-weight: bold;
+  text-decoration: none;
+}
+
+a:hover {
+  color: rgba(0,0,0,.75);
+}
 
 /* Form elements
 -------------------------------------------------*/
@@ -94,7 +103,7 @@ input[type=range] {
   display:inline-block!important;
   vertical-align:middle;
   height:15px;
-  background:rgba(0,0,0,0.25);
+  background:rgba(0,0,0,0.1);
   width: 100%;
   overflow:hidden;
   cursor:pointer;
@@ -318,6 +327,14 @@ input[type=range]:hover::-webkit-slider-thumb {
 .marginb-3 { margin-bottom: -3vmin;}
 .marginb-4 { margin-bottom: -4vmin;}
 
+/* Padding
+-------------------------------------------------*/
+
+.pad1            { padding: 1vmin; }
+.pad2            { padding: 2vmin; }
+.pad3            { padding: 3vmin; }
+.pad4            { padding: 4vmin; }
+
 /* Border radius
 -------------------------------------------------*/
 
@@ -350,7 +367,7 @@ input[type=range]:hover::-webkit-slider-thumb {
 .attr-background9, .background9   { background-color: #FF851B; color: #FF851B;  }
 .attr-background10, .background10 { background-color: #FF4136; color: #FF4136; }
 .attr-background11, .background11 { background-color: #F012BE; color: #F012BE; }
-.attr-background12, .background12 { background-color: #B10DC9; color: #B10DC9; }
+.attr-background12, .background12 { background-color: #B34CC2; color: #B34CC2; }
 .attr-background13, .background13 { background-color: #85144B; color: #85144B; }
 .attr-background14, .background14 { background-color: #111; color: #111; }
 .attr-background15, .background15 { background-color: #aaa; color: #aaa; }

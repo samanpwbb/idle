@@ -1,14 +1,3 @@
-/* TODO
-1. Intro animation
-2. Make hands 'special' and add alternatives
-3. Add share button / UI
-4. Don't use for (key in object), use Object.keys instead
-5. Save to url shortener service
-6. Highlight limb matches
-7. Proper mobile support.
-8. Bring back proper matching with getter/setters???
-*/
-
 var background = document.getElementsByClassName('js-background')[0],
   form = document.getElementsByClassName('js-form')[0],
   bodyparts = document.getElementsByClassName('js-configurable'),
@@ -32,22 +21,22 @@ var background = document.getElementsByClassName('js-background')[0],
         'leg-lower-right': [
           'none',
           'feet',
-          'details'
+          ' '
         ],
         'leg-lower-left': [
           'none',
           'feet',
-          'details'
+          ' '
         ],
         'arm-upper-left': [
           'none',
-          'details',
-          'wings'
+          'detail',
+          'wing'
         ],
         'arm-upper-right': [
           'none',
-          'details',
-          'wings'
+          'detail',
+          'wing'
         ]
       }
     },
@@ -136,14 +125,20 @@ function handleInput(target) {
   var isBodyPart = target.classList.contains('js-configurable');
 
   resetBody();
+  form.classList.add('in');
 
   if (!isActive && isBodyPart) {
     makeForm(target);
     positionForm(target);
   } else {
-    resetForm();
-    form.style.bottom = null;
-    form.style.left = null;
+    form.classList.remove('in');
+
+    window.setTimeout(function() {
+      form.innerHTML = '';
+      form.style.bottom = null;
+      form.style.left = null;
+    }, 250);
+
   }
 
 };
@@ -154,17 +149,13 @@ function resetBody() {
   }
 }
 
-function resetForm() {
-  form.innerHTML = '';
-};
-
 function makeForm(bodyPart) {
-  resetForm();
+  form.innerHTML = '';
 
   bodyPart.classList.add('active');
   var fields = document.createElement('DIV');
     fields.id = 'form-' + bodyPart.id;
-    fields.className = 'js-fields fields in animate-opacity';
+    fields.className = 'js-fields fields center-y';
 
   // Create form fields
   for (var key in config) {
@@ -216,7 +207,7 @@ function makeForm(bodyPart) {
         case 'position':
           for (var i = 0; i < 2; i++) {
             var button = document.createElement('BUTTON');
-            var change = (i === 0) ? -2 : 2;
+            var change = (i === 0) ? -1 : 1;
 
             button.dataset.attribute = key;
             button.dataset.bodypart = bodyPart.id;
@@ -264,12 +255,10 @@ function positionForm(el) {
   if (!el) return false;
   var topSpace = Math.floor(el.getBoundingClientRect().top);
   var rightSpace = Math.floor(el.getBoundingClientRect().right);
-  var formHeight = Math.floor(form.offsetHeight);
   var partHeight = Math.floor(el.offsetHeight);
   var formWidth = Math.floor(form.offsetWidth);
-  var isTop = topSpace < window.innerHeight / 2;
   var isRight = rightSpace < window.innerWidth / 2;
-  form.style.bottom = !isTop ? window.innerHeight - (topSpace + partHeight) - 40 + 'px' : window.innerHeight - (formHeight + topSpace) + 40 + 'px';
+  form.style.bottom = window.innerHeight - (topSpace + partHeight/2) + 'px';
   form.style.left = !isRight ? rightSpace + 40 + 'px' : rightSpace - (formWidth + partHeight) - 20  + 'px';
 }
 
@@ -300,6 +289,7 @@ function updateData(activePart, attribute, number) {
 
   /* Update query string */
   makeQueryString(storedBody);
+  getShortUrl();
 
 };
 
@@ -385,6 +375,8 @@ function initialize() {
 
   var params = window.location.hash;
 
+  getShortUrl();
+
   if (params) {
     storedBody = getDataFromQueryString(params);
     for (part in storedBody) {
@@ -398,3 +390,34 @@ function initialize() {
 
 initialize();
 
+/* sharing */
+
+function getShortUrl() {
+  var request = new XMLHttpRequest();
+  var url = 'http://api.bitly.com/v3/shorten?access_token=38ed1d345cbcbf9f7234601fca24aeb15d3939e5&longUrl=' + window.location.href;
+  request.open('GET', url, true);
+
+  request.onload = function() {
+    if (request.status >= 200 && request.status < 400) {
+      // Success!
+      var data = JSON.parse(request.responseText);
+      renderShortUrl(data.url);
+    } else {
+      // We reached our target server, but it returned an error
+      // TODO
+    }
+  };
+
+  request.onerror = function() {
+    // There was a connection error of some sort
+    // TODO
+  };
+
+  request.send();
+}
+
+function renderShortUrl(url) {
+  if (url) {
+    document.getElementsByClassName('js-share')[0].innerHTML = url;
+  }
+}
