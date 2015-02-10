@@ -422,7 +422,6 @@ function renderShortUrl(url) {
   var shareInput = document.getElementsByClassName('js-share')[0];
 
   shareInput.value = val;
-  console.log(val.length);
   shareInput.size = Math.floor(val.length * 1.3333);
 
 }
