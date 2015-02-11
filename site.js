@@ -396,7 +396,6 @@ initialize();
 
 /* sharing */
 
-
 function getShortUrl() {
   var request = new XMLHttpRequest();
   var longUrl = window.location.origin + window.location.pathname + encodeURIComponent(window.location.hash);
