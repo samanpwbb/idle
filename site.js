@@ -101,18 +101,21 @@ background.addEventListener('click', function(ev) {
 });
 
 for (var i = 0;i < bodyparts.length; i++) {
-  bodyparts[i].addEventListener('mouseover', function(ev) {
-    for (var i = 0; i < bodyparts.length; i++) {
-      bodyparts[i].classList.remove('hover');
-    }
-    ev.currentTarget.classList.add('hover');
-    ev.stopPropagation();
-  });
 
-  bodyparts[i].addEventListener('mouseleave', function(ev) {
-    ev.currentTarget.classList.remove('hover');
-    ev.stopPropagation();
-  });
+  if (window.innerWidth >= 640) {
+    bodyparts[i].addEventListener('mouseover', function(ev) {
+      for (var i = 0; i < bodyparts.length; i++) {
+        bodyparts[i].classList.remove('hover');
+      }
+      ev.currentTarget.classList.add('hover');
+      ev.stopPropagation();
+    });
+
+    bodyparts[i].addEventListener('mouseleave', function(ev) {
+      ev.currentTarget.classList.remove('hover');
+      ev.stopPropagation();
+    });
+  }
 
   bodyparts[i].addEventListener('click', function(ev) {
     if (ev.target.classList.contains('button')) return false;
@@ -152,12 +155,20 @@ function resetBody() {
   for (var i = 0; i < bodyparts.length; i++) {
     bodyparts[i].classList.remove('active');
   }
+  if (window.innerWidth <= 640) {
+    document.getElementsByClassName('body-container-mobile')[0].classList.remove('offset');
+  }
 }
 
 function makeForm(bodyPart) {
   form.innerHTML = '';
 
+  if (window.innerWidth <= 640) {
+    document.getElementsByClassName('body-container-mobile')[0].classList.add('offset');
+  }
+
   bodyPart.classList.add('active');
+
   var fields = document.createElement('DIV');
     fields.id = 'form-' + bodyPart.id;
     fields.className = 'js-fields fields center-y';

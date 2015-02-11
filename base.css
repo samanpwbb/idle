@@ -60,6 +60,7 @@ a:hover {
   color: rgba(0,0,0,.75);
 }
 
+.z10 { z-index: 10;}
 /* Form elements
 -------------------------------------------------*/
 
@@ -166,6 +167,20 @@ input[type=text]:active {
   letter-spacing: 2px;
   box-sizing: border-box;
   color: rgba(0,0,0,.5);
+}
+
+@media only screen and (max-width:640px) {
+input[type=range]::-webkit-slider-thumb {
+  height:15px; width:40px;
+}
+
+input[type=range]::-moz-range-thumb {
+  height:15px; width:40px;
+}
+
+input[type=range]::-ms-thumb {
+  height:15px; width:40px;
+}
 }
 
 /* Positioning
