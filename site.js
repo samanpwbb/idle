@@ -258,6 +258,11 @@ function makeForm(bodyPart) {
 
 function positionForm(el) {
   if (!el) return false;
+  if (window.innerWidth <= 640) {
+    return false;
+    form.style.bottom = null;
+    form.style.left = null;
+  }
   var topSpace = Math.floor(el.getBoundingClientRect().top);
   var rightSpace = Math.floor(el.getBoundingClientRect().right);
   var partHeight = Math.floor(el.offsetHeight);

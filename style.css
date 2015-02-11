@@ -7,17 +7,17 @@
 }
 
 .configurable.hover {
-  box-shadow: 0 0 0 5px white, 0 0 0 10px rgba(0,0,0,.05);
+  box-shadow: 0 0 0 1vmin white, 0 0 0 2vmin rgba(0,0,0,.05);
 }
 
 .configurable.active {
-  box-shadow: 0 0 0 5px white, 0 0 0 10px rgba(0,0,0,.1);
+  box-shadow: 0 0 0 1vmin white, 0 0 0 2vmin rgba(0,0,0,.1);
   z-index: 100;
   cursor: pointer;
 }
 
 .configurable.active:hover {
-  box-shadow: 0 0 0 5px white, 0 0 0 10px rgba(0,0,0,.2);
+  box-shadow: 0 0 0 1vmin white, 0 0 0 2vmin rgba(0,0,0,.2);
 }
 
 /* Form
@@ -173,6 +173,30 @@
   background: rgba(0,0,0,0.1);
   width: auto;
   display: inline-block;
+}
+
+@media only screen and (max-width:640px) {
+  .mobile-pintop {
+    position: fixed;
+    top: 4vmin;
+    left: 4vmin;
+  }
+  .mobile-fl { float: left;}
+  .form {
+    left: 4vmin;
+    margin-bottom: 12vmin;
+    bottom: 0;
+  }
+  #body-container {
+    top: 33.3333%;
+  }
+
+  .fields {
+    position: absolute;
+    transform: none;
+    bottom: 100%;
+    top: auto;
+  }
 }
 
 /* Container
