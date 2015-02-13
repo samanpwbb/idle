@@ -16,7 +16,7 @@ var background = document.getElementsByClassName('js-background')[0],
         'head': [
           'none',
           'ears',
-          'antennae'
+          'antenna'
         ],
         'leg-lower-right': [
           'none',
